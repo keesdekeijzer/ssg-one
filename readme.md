@@ -4,7 +4,8 @@ Static Site Generator
 
 ## Directory structuur
 
-- 'content/' Markdown-bestanden met metadata (titel, datum, tags)
+- 'content/posts/' Markdown-bestanden met metadata (titel, datum, tags)
+- 'content/pages/' Markdown-bestanden met metadata (titel, datum, tags)
 - 'templates/' met Jinja2, voor bijvoorbeeld 'base.html' en 'post.html'
 - 'static' assets zoals CSS, JS, Afbeeldingen
 - 'output/' waar de uiteindelijke HTML pagina's worden weggeschreven
