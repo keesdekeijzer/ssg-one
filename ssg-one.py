@@ -21,19 +21,20 @@ def load_posts():
         if not filename.endswith('.md'):
             continue
 
-        html = markdown.markdown(post.content)
-        slug = filename.replace('.md', '')
         path = os.path.join(POSTS_DIR, filename)
         post = frontmatter.load(path)
 
-        date = datetime.fromisoformat(post.get('date'))
+        html = markdown.markdown(post.content)
+        slug = filename.replace('.md', '')
+
+        date = datetime.fromisoformat(str(post.get('date')))
 
         posts.append({
             'title': post.get('title', 'Untitled'),
             'date': date,
             'slug': slug,
             'html': html,
-            'slug': slug
+            'tags': post.get('tags', [])
         })
 
     
