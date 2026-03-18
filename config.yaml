@@ -1,0 +1,27 @@
+site:
+  title: "Mijn blog"
+  description: "Welkom op mijn persoonlijke blog."
+  base_url: "https://localhost:5500"
+
+paths:
+  content: "content"
+  output: "output"
+  templates: "templates"
+  posts: "content/posts"
+  pages: "content/pages"
+  static: "static"
+
+blog:
+  index_limit: 10
+  post_url: "posts/{slug}/"
+  tag_url: "tags/{tag}/"
+
+menu:
+  - name: "Home"
+    url: "/"
+  - name: "Blog"
+    url: "/"
+  - name: "About"
+    url: "/about/"
+
+  

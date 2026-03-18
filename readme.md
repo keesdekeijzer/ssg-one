@@ -49,3 +49,34 @@ Commandline interface met bijvoorbeeld: *ssg-one build*, *ssg-one serve* en '*sg
 
 Configuratie via een 'config.yaml' bestand.
 
+- sitetitel en beschrijving
+- basis-URL
+- paden voor content, templates en output
+- menu's (navigatie)
+- bloginstellingen (aantal posts op index, sortering)
+- URL-structuur (bijvoorbeeld '/blog/slug/' i.p.v. '/posts/slug/')
+
+## Live development server
+
+Een lokale webserver die automatisch ververst als je iets aanpast.
+
+Nodig:
+- watchdog : voor het opmerken van bestandswijzigingen
+- livereload : server draaien en browser verversen
+
+## Gebruik
+
+Normaal builden:
+
+```
+python ssg-one.py
+```
+
+Live server starten:
+
+```
+python ssg-one serve
+```
+
+Website wordt automatisch opnieuw gegenereerd op http://localhost:5500
+
