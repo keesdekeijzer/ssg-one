@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mijn eerste post - Mijn blog</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
+    <header>
+    <h1>Mijn blog</h1>
     <nav>
         <ul>
             
@@ -13,19 +16,20 @@
             
             <li><a href="/">Blog</a></li>
             
-            <li><a href="/about/">About</a></li>
+            <li><a href="/about/">Over</a></li>
             
         </ul>
     </nav>
+    </header>
     <main>
         
   <h1>Mijn eerste post</h1>
-  <p><small>2026-03-16</small></p>
+  <p class="post-date">2026-03-16</p>
 
-  <div><p>Welkom bij mijn eerste blogpost. Dit is <strong>Markdown</strong>.</p></div>
+  <div class="post-content"><p>Welkom bij mijn eerste blogpost. Dit is <strong>Markdown</strong>.</p></div>
 
   
-    <p>Tags: 
+    <p class="tags">Tags: 
       
         <a href="/tags/python">python</a>,      
       
@@ -34,6 +38,10 @@
     </p>
   
 
+        
     </main>
+    <footer>
+        <p>&copy; Mijn blog - Welkom op mijn persoonlijke blog.</p>
+    </footer>
 </body>
 </html>

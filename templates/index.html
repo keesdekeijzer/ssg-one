@@ -3,12 +3,28 @@
 {% block content %}
 <h1>Blog</h1>
 
-<ul>
+<ul class="post-list">
     {% for post in posts %}
     <li>
         <a href="/posts/{{ post.slug }}/">{{ post.title }}</a>
-        <small>{{ post.date }}</small>
+        <small>{{ post.date.strftime("%Y-%m-%d") }}</small>
     </li>
     {% endfor %}
 </ul>
+
+<div class="pagination">
+    {% if page == 2 %}
+    <a href="/">Vorige</a>
+    {% elif page > 2 %}
+    <a href="/page/{{ page-1 }}/">Vorige</a>
+    {% endif %}
+
+
+    <span>Pagina {{ page }} van {{ total_pages }}</span>
+    {% if page < total_pages %}
+    <a href="/page/{{ page+1 }}/">Volgende</a>
+    {% endif %}
+</div>
+
 {% endblock %}
+

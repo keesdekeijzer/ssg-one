@@ -15,13 +15,14 @@ blog:
   index_limit: 10
   post_url: "posts/{slug}/"
   tag_url: "tags/{tag}/"
+  pagination_url: "page/{num}/"
 
 menu:
   - name: "Home"
     url: "/"
   - name: "Blog"
     url: "/"
-  - name: "About"
+  - name: "Over"
     url: "/about/"
 
   

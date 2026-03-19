@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }} - {{ site.title }}</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
+    <header>
+    <h1>{{ site.title }}</h1>
     <nav>
         <ul>
             {% for item in menu %}
@@ -13,9 +16,14 @@
             {% endfor %}
         </ul>
     </nav>
+    </header>
     <main>
         {% block content %}
         {% endblock %}
+        
     </main>
+    <footer>
+        <p>&copy; {{ site.title }} - {{ site.description }}</p>
+    </footer>
 </body>
 </html>

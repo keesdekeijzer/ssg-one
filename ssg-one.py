@@ -1,6 +1,8 @@
 import os
 from pydoc import html
+import re
 import shutil
+from tempfile import template
 from jinja2 import Environment, FileSystemLoader
 import markdown
 import frontmatter
@@ -9,6 +11,9 @@ from livereload import Server
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 import yaml
+import hashlib
+import json
+import importlib.util
 
 
 # Laad configuratie
@@ -45,6 +50,15 @@ def write_file(path, content):
     with open(path, 'w', encoding='utf-8') as f:
         f.write(content)
 
+# paginatie
+
+def paginate(items, per_page):
+    pages = []
+    for i in range(0, len(items), per_page):
+        pages.append(items[i:i + per_page])
+    return pages
+
+
 # Laad alle posts en sorteer ze op datum
 
 def load_posts():
@@ -57,6 +71,7 @@ def load_posts():
         post = frontmatter.load(path)
 
         html = markdown.markdown(post.content)
+        html = apply_shortcodes(html)
         slug = filename.replace('.md', '')
 
         date = datetime.fromisoformat(str(post.get('date')))
@@ -88,11 +103,28 @@ def render_post(post):
 
 
 def render_index(posts):
-    template = env.get_template('index.html')
-    limit = CONFIG["blog"]["index_limit"]
-    html = template.render(posts=posts[:limit], site=CONFIG['site'], menu=CONFIG['menu'])
 
-    write_file(os.path.join(OUTPUT_DIR, 'index.html'), html)
+    template = env.get_template('index.html')
+    per_page = CONFIG['blog']['index_limit']
+    pages = paginate(posts, per_page)
+
+    for i, page_posts in enumerate(pages, start=1):
+        if i == 1:
+            out_dir = OUTPUT_DIR
+        else:
+            pattern = CONFIG['blog']['pagination_url']
+
+            out_dir = os.path.join(OUTPUT_DIR, pattern.format(num=i))
+        print("page:",i)
+        html = template.render(posts=page_posts, 
+                               page=i, 
+                               total_pages=len(pages),
+                               site=CONFIG['site'], 
+                               menu=CONFIG['menu'], 
+                               title=f"Blog - Pagina {i}",
+                               )
+
+        write_file(os.path.join(out_dir, 'index.html'), html)
 
 
 def render_tags(posts):
@@ -109,7 +141,8 @@ def render_tags(posts):
         out_dir = os.path.join(OUTPUT_DIR, tag_pattern.format(tag=tag))
         
 
-        html = template.render(posts=tag_posts, site=CONFIG['site'], menu=CONFIG['menu'], title=f"Posts tagged '{tag}'")
+        html = template.render(posts=tag_posts, site=CONFIG['site'], menu=CONFIG['menu'], 
+                               title=f"Posts tagged '{tag}'", page=1, total_pages=1, pagination_url=CONFIG['blog']['pagination_url'])
         write_file(os.path.join(out_dir, 'index.html'), html)
 
 
@@ -134,6 +167,10 @@ def render_pages():
 
 
 def build():
+    plugins = load_plugins()
+    for plugin in plugins:
+        plugin.run({"posts": posts, "config": CONFIG, "output": OUTPUT_DIR})
+
     # Clean output directory
 
     if os.path.exists(OUTPUT_DIR):
@@ -153,6 +190,8 @@ def build():
     render_index(posts)
     render_tags(posts)
     render_pages()
+    render_rss(posts)
+    render_sitemap(posts)
 
     print("Site gegenereerd in de map 'output'.")
 
@@ -166,6 +205,99 @@ def serve():
 
     print("Ontwikkelserver gestart op http://localhost:5500")
     server.serve(root=OUTPUT_DIR, port=5500)
+
+
+
+
+# sitemap
+
+def render_sitemap(posts):
+    urls = []
+    urls.append('/')
+
+    for post in posts:
+        urls.append(f"/posts/{post['slug']}/")
+    for tag in set(tag for post in posts for tag in post['tags']):
+        urls.append(f"/tags/{tag}/")
+    
+    xml = "<urlset>"
+    for url in urls:
+        xml += f"<url><loc>{CONFIG['site']['base_url']}{url}</loc></url>"
+    xml += "</urlset>"
+
+    write_file(os.path.join(OUTPUT_DIR, 'sitemap.xml'), xml)
+
+
+# rss feed
+
+def render_rss(posts):
+    # base = CONFIG['site']['base_url']
+
+    items = ""
+    for post in posts[:10]:  # Laatste 10 posts
+        items += f"""
+        <item>
+            <title>{post['title']}</title>
+            <link>{CONFIG['site']['base_url']}/posts/{post['slug']}/</link>
+            <pubDate>{post['date'].strftime('%a, %d %b %Y %H:%M:%S +0000')}</pubDate>
+            <description><![CDATA[{post['html']}]]></description>
+        </item>
+        """
+
+    rss = f"""<?xml version="1.0" encoding="UTF-8" ?>
+    <rss version="2.0">
+    <channel>
+        <title>{CONFIG['site']['title']}</title>
+        <link>{CONFIG['site']['base_url']}</link>
+        <description>{CONFIG['site']['description']}</description>
+        {items}
+    </channel>
+    </rss>"""
+
+    write_file(os.path.join(OUTPUT_DIR, 'feed.xml'), rss)
+
+
+# shortcodes
+
+def apply_shortcodes(html):
+    # Voorbeeld: {{ youtube(id="abc123") }}
+    # Vervang dit door de juiste embed code
+    pattern = r'\{\{\s*youtube\(id="([^"]+)"\)\s*\}\}'
+    return re.sub(pattern, r'<iframe width="560" height="315" src="https://www.youtube.com/embed/\1" frameborder="0" allowfullscreen></iframe>', html)
+
+
+# caching
+
+def file_hash(path):
+    with open(path, 'rb') as f:
+        return hashlib.md5(f.read()).hexdigest()
+    
+def load_cache():
+    if os.path.exists('.cache.json'):
+        return json.load(open('.cache.json'))
+    return {}
+
+def save_cache(cache):
+    json.dump(cache, open('.cache.json', 'w'))
+
+def should_render(path, cache):
+    h = file_hash(path)
+    if cache.get(path) != h:
+        cache[path] = h
+        return True
+    return False
+
+# plugins
+
+def load_plugins():
+    plugins = []
+    for filename in os.listdir('plugins'):
+        if filename.endswith('.py'):
+            spec = importlib.util.spec_from_file_location(filename[:-3], os.path.join('plugins', filename))
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+            plugins.append(module)
+    return plugins
 
 
 class RebuildHandler(FileSystemEventHandler):
