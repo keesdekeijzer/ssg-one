@@ -23,7 +23,8 @@
             <title>Mijn negende post</title>
             <link>https://localhost:5500/posts/negende-post/</link>
             <pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate>
-            <description><![CDATA[<p>Welkom bij mijn negende blogpost. Dit is <strong>Markdown</strong>.</p>]]></description>
+            <description><![CDATA[<p>Welkom bij mijn negende blogpost. Dit is <strong>Markdown</strong>.</p>
+<p><div class="warning">Dit is een waarschuwing! ! !</div></p>]]></description>
         </item>
         
         <item>
@@ -65,7 +66,8 @@
             <title>Mijn tiende post</title>
             <link>https://localhost:5500/posts/tiende-post/</link>
             <pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate>
-            <description><![CDATA[<p>Welkom bij mijn tiende blogpost. Dit is <strong>Markdown</strong>.</p>]]></description>
+            <description><![CDATA[<p>Welkom bij mijn tiende blogpost. Dit is <strong>Markdown</strong>.</p>
+<p><div class="warning">Dit is belangrijk!</div></p>]]></description>
         </item>
         
         <item>

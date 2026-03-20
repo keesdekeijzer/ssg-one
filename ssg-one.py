@@ -59,6 +59,26 @@ def paginate(items, per_page):
     return pages
 
 
+# shortcodes
+
+def apply_shortcodes(html):
+    # Voorbeeld: {{ youtube(id="abc123") }}
+    # Vervang dit door de juiste embed code
+    html = re.sub(
+        r'\{\{\s*youtube\(id="([^"]+)"\)\s*\}\}', 
+        r'<div class="youtube-container"><iframe width="560" height="315" src="https://www.youtube.com/embed/\1" frameborder="0" allowfullscreen></iframe></div>', 
+        html
+    )
+
+    # Waarschuwing shortcode
+    # {{ warning }}
+    html = re.sub(r"\{\{\s*warning text=\"(.*?)\"\s*\}\}",
+                  r'<div class="warning">\1</div>',
+                  html)
+
+    print(html)
+    return html
+
 # Laad alle posts en sorteer ze op datum
 
 def load_posts():
@@ -133,7 +153,7 @@ def render_tags(posts):
         for tag in post['tags']:
             tags.setdefault(tag, []).append(post)
 
-    template = env.get_template('index.html')
+    template = env.get_template('tags.html')
 
     for tag, tag_posts in tags.items():
 
@@ -142,7 +162,7 @@ def render_tags(posts):
         
 
         html = template.render(posts=tag_posts, site=CONFIG['site'], menu=CONFIG['menu'], 
-                               title=f"Posts tagged '{tag}'", page=1, total_pages=1, pagination_url=CONFIG['blog']['pagination_url'])
+                               title=f"Posts tagged '{tag}'")
         write_file(os.path.join(out_dir, 'index.html'), html)
 
 
@@ -157,6 +177,7 @@ def render_pages():
         page = frontmatter.load(path)
 
         html_content = markdown.markdown(page.content)
+        html_content = apply_shortcodes(html_content)
 
         rendered = template.render(title=page.get('title'), content=html_content, site=CONFIG['site'], menu=CONFIG['menu'])
 
@@ -212,17 +233,53 @@ def serve():
 # sitemap
 
 def render_sitemap(posts):
-    urls = []
-    urls.append('/')
+    base = CONFIG['site']['base_url'].rstrip('/')
+    urls = set()
+
+    # homepage
+
+    urls.add('/')
+
+    # paginatie
+
+    per_page = CONFIG['blog']['index_limit']
+    total_pages = (len(posts) + per_page - 1) // per_page
+
+    for i in range(1, total_pages + 1):
+        if i == 1:
+            urls.add('/')
+        else:
+            pattern = CONFIG['blog']['pagination_url']
+            urls.add("/" + pattern.format(num=i))
+
+    # posts
 
     for post in posts:
-        urls.append(f"/posts/{post['slug']}/")
-    for tag in set(tag for post in posts for tag in post['tags']):
-        urls.append(f"/tags/{tag}/")
-    
-    xml = "<urlset>"
-    for url in urls:
-        xml += f"<url><loc>{CONFIG['site']['base_url']}{url}</loc></url>"
+        pattern = CONFIG['blog']['post_url']
+        urls.add("/" + pattern.format(slug=post['slug']))
+
+    # tags
+
+    all_tags = set(tag for post in posts for tag in post['tags'])
+    for tag in all_tags:
+        pattern = CONFIG['blog']['tag_url']
+        urls.add("/" + pattern.format(tag=tag))
+
+    # pages
+
+    for filename in os.listdir(PAGES_DIR):
+        if not filename.endswith('.md'):
+            continue
+        slug = filename.replace('.md', '')
+        urls.add(f"/{slug}/")
+
+    # genereer XML
+
+    xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
+    xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+
+    for url in sorted(urls):
+        xml += f"<url><loc>{base}{url}</loc></url>\n"
     xml += "</urlset>"
 
     write_file(os.path.join(OUTPUT_DIR, 'sitemap.xml'), xml)
@@ -256,14 +313,6 @@ def render_rss(posts):
 
     write_file(os.path.join(OUTPUT_DIR, 'feed.xml'), rss)
 
-
-# shortcodes
-
-def apply_shortcodes(html):
-    # Voorbeeld: {{ youtube(id="abc123") }}
-    # Vervang dit door de juiste embed code
-    pattern = r'\{\{\s*youtube\(id="([^"]+)"\)\s*\}\}'
-    return re.sub(pattern, r'<iframe width="560" height="315" src="https://www.youtube.com/embed/\1" frameborder="0" allowfullscreen></iframe>', html)
 
 
 # caching
