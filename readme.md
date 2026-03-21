@@ -80,3 +80,16 @@ python ssg-one serve
 
 Website wordt automatisch opnieuw gegenereerd op http://localhost:5500
 
+## Shortcodes
+
+Een directory shortcodes/ met 1 Python bestand per shortcode.
+
+Een loader die alle shortcodes aytomatisch laadt.
+
+Een centrale functie die shortcodes toepast op HTML.
+
+
+## Syntax highlighting
+
+Deze kan worden toegevoegd via Prism.js of Highlight.js
+

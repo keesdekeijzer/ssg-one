@@ -98,3 +98,45 @@ footer {
     margin: 1rem 0;
     color: #664d03;
 }
+
+.code-block {
+    background: #2d2d2d;
+    color: #f8f8f2;
+    padding: 1rem;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    font-family: Consolas, Monaco, monospace;
+    font-size: 0.9rem;
+}
+
+.code-block .python { color: #f8f8f2; }
+
+.btn {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
+
+.btn-default {
+    background: #e0e0e0;
+    color: #333;
+}
+
+.btn-primary {
+    background: #007BFF;
+    color: white;
+}
+
+.btn-success {
+    background: #28a745;
+    color: white;
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: white;
+}

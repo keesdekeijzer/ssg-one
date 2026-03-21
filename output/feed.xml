@@ -24,7 +24,8 @@
             <link>https://localhost:5500/posts/negende-post/</link>
             <pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate>
             <description><![CDATA[<p>Welkom bij mijn negende blogpost. Dit is <strong>Markdown</strong>.</p>
-<p><div class="warning">Dit is een waarschuwing! ! !</div></p>]]></description>
+<p><div class="warning">Dit is een waarschuwing! ! !</div></p>
+<p><a href="/files/app.zip" class="btn btn-primary">Download</a></p>]]></description>
         </item>
         
         <item>
@@ -38,7 +39,9 @@
             <title>Mijn zevende post</title>
             <link>https://localhost:5500/posts/zevende-post/</link>
             <pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate>
-            <description><![CDATA[<p>Welkom bij mijn zevende blogpost. Dit is <strong>Markdown</strong>.</p>]]></description>
+            <description><![CDATA[<p>Welkom bij mijn zevende blogpost. Dit is <strong>Markdown</strong>.</p>
+<p><pre class="code-block"><code class="python">def hello():
+    print(&quot;Hallo Wereld!&quot;)</code></pre></p>]]></description>
         </item>
         
         <item>

@@ -38,6 +38,8 @@ PAGES_DIR = CONFIG  ['paths']['pages']
 
 env = Environment(loader=FileSystemLoader(TEMPLATE_DIR))
 
+SHORTCODES = []
+
 # helper functies
 
 def ensure_dir(path):
@@ -61,27 +63,33 @@ def paginate(items, per_page):
 
 # shortcodes
 
-def apply_shortcodes(html):
-    # Voorbeeld: {{ youtube(id="abc123") }}
-    # Vervang dit door de juiste embed code
-    html = re.sub(
-        r'\{\{\s*youtube\(id="([^"]+)"\)\s*\}\}', 
-        r'<div class="youtube-container"><iframe width="560" height="315" src="https://www.youtube.com/embed/\1" frameborder="0" allowfullscreen></iframe></div>', 
-        html
-    )
+def load_shortcodes():
+    modules = []
+    folder = "shortcodes"
 
-    # Waarschuwing shortcode
-    # {{ warning }}
-    html = re.sub(r"\{\{\s*warning text=\"(.*?)\"\s*\}\}",
-                  r'<div class="warning">\1</div>',
-                  html)
+    for filename in os.listdir(folder):
+        if filename.endswith(".py"):
+            path = os.path.join(folder, filename)
+            spec = importlib.util.spec_from_file_location(filename, path)
+            mod = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(mod)
+            modules.append(mod)
 
-    print(html)
+    return modules
+
+def apply_shortcodes(html, shortcode_modules):
+    print("apply_shortcodes: ",shortcode_modules)
+    for mod in shortcode_modules:
+        print("apply shortcodes: ",mod)
+        if hasattr(mod, "apply"):
+            html = mod.apply(html)
     return html
+
+
 
 # Laad alle posts en sorteer ze op datum
 
-def load_posts():
+def load_posts(SHORTCODES):
     posts = []
     for filename in os.listdir(POSTS_DIR):
         if not filename.endswith('.md'):
@@ -91,7 +99,7 @@ def load_posts():
         post = frontmatter.load(path)
 
         html = markdown.markdown(post.content)
-        html = apply_shortcodes(html)
+        html = apply_shortcodes(html, SHORTCODES)
         slug = filename.replace('.md', '')
 
         date = datetime.fromisoformat(str(post.get('date')))
@@ -166,7 +174,7 @@ def render_tags(posts):
         write_file(os.path.join(out_dir, 'index.html'), html)
 
 
-def render_pages():
+def render_pages(SHORTCODES):
     template = env.get_template('page.html')
 
     for filename in os.listdir(PAGES_DIR):
@@ -177,7 +185,7 @@ def render_pages():
         page = frontmatter.load(path)
 
         html_content = markdown.markdown(page.content)
-        html_content = apply_shortcodes(html_content)
+        html_content = apply_shortcodes(html_content, SHORTCODES)
 
         rendered = template.render(title=page.get('title'), content=html_content, site=CONFIG['site'], menu=CONFIG['menu'])
 
@@ -188,6 +196,8 @@ def render_pages():
 
 
 def build():
+    SHORTCODES = load_shortcodes()
+    print(SHORTCODES)
     plugins = load_plugins()
     for plugin in plugins:
         plugin.run({"posts": posts, "config": CONFIG, "output": OUTPUT_DIR})
@@ -204,13 +214,13 @@ def build():
 
     shutil.copytree(STATIC_DIR, os.path.join(OUTPUT_DIR, 'static'), dirs_exist_ok=True)
 
-    posts = load_posts()
+    posts = load_posts(SHORTCODES)
     for post in posts:
         render_post(post)
     
     render_index(posts)
     render_tags(posts)
-    render_pages()
+    render_pages(SHORTCODES)
     render_rss(posts)
     render_sitemap(posts)
 
