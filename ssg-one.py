@@ -194,6 +194,40 @@ def render_pages(SHORTCODES):
         out_dir = os.path.join(OUTPUT_DIR, slug)
         write_file(os.path.join(out_dir, 'index.html'), rendered)
 
+def render_search_index(posts):
+    items = []
+
+    # posts
+
+    for post in posts:
+        items.append({
+            "title": post["title"],
+            "url": f"/posts/{post['slug']}/",
+            "content": post["html"],
+            "tags": post.get("tags", []),
+            "date": post["date"].isoformat(),
+            "summary": post.get("summary", ""),
+        })
+
+    # pages
+
+    for filename in os.listdir(PAGES_DIR):
+        if filename.endswith(".md"):
+            path = os.path.join(PAGES_DIR, filename)
+            page = frontmatter.load(path)
+            slug = filename.replace(".md", "")
+            html = markdown.markdown(page.content)
+
+            items.append({
+                "title": page.get("title"),
+                "url": f"/{slug}/",
+                "content": html,
+                "tags": page.get("tags", []),
+                "summary": page.get("summary", "")
+            })
+
+    write_file(os.path.join(OUTPUT_DIR, "search.json"), json.dumps(items))
+
 
 def build():
     SHORTCODES = load_shortcodes()
@@ -223,6 +257,7 @@ def build():
     render_pages(SHORTCODES)
     render_rss(posts)
     render_sitemap(posts)
+    render_search_index(posts)
 
     print("Site gegenereerd in de map 'output'.")
 
