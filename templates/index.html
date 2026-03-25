@@ -5,10 +5,27 @@
 
 <ul class="post-list">
     {% for post in posts %}
-    <li>
+
+    <article class="post-card">
+
+        {% if post.thumb_jpg %}
+        <a href="{{ post.url }}">
+            <picture>
+                <source srcset="{{ post.images.small.webp }}" type="image/webp">
+                <source srcset="{{ post.images.small.jpg }}" type="image/jpeg">
+                <img class="thumb" src="{{ post.images.small.jpg }}" alt="{{ post.title }}">
+            </picture>
+        </a>
+        {% endif %}
+
+    
+    <h2>
         <a href="/posts/{{ post.slug }}/">{{ post.title }}</a>
-        <small>{{ post.date.strftime("%Y-%m-%d") }}</small>
-    </li>
+    </h2>
+    <p>{{ post.summary }}</p>
+        <p><small>{{ post.date.strftime("%Y-%m-%d") }}</small></p>
+    
+    </article>
     {% endfor %}
 </ul>
 

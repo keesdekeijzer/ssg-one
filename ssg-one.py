@@ -14,7 +14,7 @@ import yaml
 import hashlib
 import json
 import importlib.util
-
+from PIL import Image
 
 # Laad configuratie
 
@@ -85,6 +85,54 @@ def apply_shortcodes(html, shortcode_modules):
             html = mod.apply(html)
     return html
 
+# thumbnails generen
+
+def create_thumbnail(input_path, output_base, width=400):
+    img = Image.open(input_path)
+    ratio = width / img.width
+    height = int(img.height * ratio)
+    img = img.resize((width, height), Image.LANCZOS)
+
+    # jpg-versie
+    jpg_path = output_base + ".jpg"
+    os.makedirs(os.path.dirname(jpg_path), exist_ok=True)
+    img.save(jpg_path, optimize=True, quality=85)
+
+    # WebP-versie
+    webp_path = output_base + ".webp"
+    img.save(webp_path, format="WEBP", quality=80)
+
+    return jpg_path, webp_path
+
+# responsive images
+
+def create_respponsive_images(input_path, output_base, sizes):
+    img = Image.open(input_path)
+
+    results = {}
+
+    for label, width in sizes.items():
+        ratio = width / img.width
+        height = int(img.height * ratio)
+        resized = img.resize((width, height), Image.LANCZOS)
+
+        # jpg
+
+        jpg_path = f"{output_base}-{label}.jpg"
+        os.makedirs(os.path.dirname(jpg_path), exist_ok=True)
+        resized.save(jpg_path, optimize=True, quality=85)
+
+        # WebP
+
+        webp_path = f"{output_base}-{label}.webp"
+        resized.save(webp_path, format="WEBP", quality=80)
+
+        results[label] = {
+            "jpg": jpg_path,
+            "webp": webp_path
+        }
+
+    return results
 
 
 # Laad alle posts en sorteer ze op datum
@@ -104,13 +152,46 @@ def load_posts(SHORTCODES):
 
         date = datetime.fromisoformat(str(post.get('date')))
 
+        # hero = metadata.get("hero")
+        hero = post.get("hero")
+
+        if hero:
+            # Pad naar originele afbeelding
+            input_path = os.path.join(STATIC_DIR, hero.lstrip("/"))
+
+            # Pad naar thumbnail
+
+            output_base = os.path.join(OUTPUT_DIR, "static/thumbs", post["slug"])
+
+            sizes = {
+                "small": 300,
+                "medium": 600,
+                "large": 1200
+            }
+
+            generated = create_respponsive_images(input_path, output_base, sizes)
+
+            post["images"] = {
+                size: {
+                    "jpg": "/static/thumbs/" + post["slug"] + f"-{size}.jpg",
+                    "webp": "/static/thumbs/" + post["slug"] + f"-{size}.webp"
+                }
+                for size in generated
+            }
+
+
+
+
+
         posts.append({
             'title': post.get('title'),
             'date': date,
             'slug': slug,
             'html': html,
-            'tags': post.get('tags', [])
+            'tags': post.get('tags', []),
         })
+
+        # post["hero"] = metadata.get("hero", "/static/images/default.jpg")
 
     
 
@@ -184,6 +265,8 @@ def render_pages(SHORTCODES):
         path = os.path.join(PAGES_DIR, filename)
         page = frontmatter.load(path)
 
+        # page_data["hero"] = page.get("hero", None)
+
         html_content = markdown.markdown(page.content)
         html_content = apply_shortcodes(html_content, SHORTCODES)
 
@@ -207,6 +290,7 @@ def render_search_index(posts):
             "tags": post.get("tags", []),
             "date": post["date"].isoformat(),
             "summary": post.get("summary", ""),
+            "hero": post.get("hero")
         })
 
     # pages

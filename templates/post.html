@@ -1,6 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+  {% if post.hero %}
+  <div>
+    <img src="{{ post.hero }}" alt="{{ post.title }}">
+    <picture>
+      <source srcset="{{ post.images.large.webp }}" type="image/webp">
+      <source srcset="{{ post.images.large.jpg }}" type="image/jpg">
+      <img class="hero" src="{{ post.images.large.jpg }}" alt="{{ post.title }}">
+
+    </picture>
+  </div>
+  {% endif %}
+
+
   <h1>{{ title }}</h1>
   <p class="post-date">{{ date }}</p>
 
