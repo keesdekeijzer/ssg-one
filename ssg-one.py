@@ -106,7 +106,8 @@ def create_thumbnail(input_path, output_base, width=400):
 
 # responsive images
 
-def create_respponsive_images(input_path, output_base, sizes):
+def create_responsive_images(input_path, output_base, sizes):
+    print("input_path: ", input_path)
     img = Image.open(input_path)
 
     results = {}
@@ -150,14 +151,20 @@ def load_posts(SHORTCODES):
         html = apply_shortcodes(html, SHORTCODES)
         slug = filename.replace('.md', '')
 
+        post['slug'] = slug
+
         date = datetime.fromisoformat(str(post.get('date')))
 
         # hero = metadata.get("hero")
         hero = post.get("hero")
 
         if hero:
+            print("post", slug)
             # Pad naar originele afbeelding
             input_path = os.path.join(STATIC_DIR, hero.lstrip("/"))
+            print("STATIC_DIR", STATIC_DIR)
+            print("hero.lstrip(/)", hero.lstrip("/"))
+
 
             # Pad naar thumbnail
 
@@ -169,7 +176,7 @@ def load_posts(SHORTCODES):
                 "large": 1200
             }
 
-            generated = create_respponsive_images(input_path, output_base, sizes)
+            generated = create_responsive_images(input_path, output_base, sizes)
 
             post["images"] = {
                 size: {
@@ -204,7 +211,7 @@ def render_post(post):
     template = env.get_template('post.html')
     html = template.render(title=post['title'], site=CONFIG['site'], menu=CONFIG['menu'],
                            content=post['html'], 
-                           date=post['date'].strftime('%Y-%m-%d'), tags=post["tags"])
+                           date=post['date'].strftime('%Y-%m-%d'), tags=post["tags"], post=post)
     
     url_pattern = CONFIG['blog']['post_url']
     out_dir = os.path.join(OUTPUT_DIR, url_pattern.format(slug=post["slug"]))
