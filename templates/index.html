@@ -11,9 +11,21 @@
         {% if post.thumb_jpg %}
         <a href="{{ post.url }}">
             <picture>
-                <source srcset="{{ post.images.small.webp }}" type="image/webp">
-                <source srcset="{{ post.images.small.jpg }}" type="image/jpeg">
-                <img class="thumb" src="{{ post.images.small.jpg }}" alt="{{ post.title }}">
+                <source type="image/webp"
+                srcset="
+                {{ post.images.small.webp }} 300w,
+                {{ post.images.medium.webp }} 600w
+                "
+                sizes="(max-width: 600px) 100vw, 300px">
+
+                <source type="image/jpeg"
+                srcset="
+                {{ post.images.small.jpg }} 300w,
+                {{ post.images.medium.jpg }} 600w
+                "
+                sizes="(max-width: 600px) 100vw, 300px">
+
+                <img class="thumb" src="{{ post.images.small.jpg }}" alt="{{ post.title }}" loading="lazy">
             </picture>
         </a>
         {% endif %}
