@@ -15,6 +15,7 @@ import hashlib
 import json
 import importlib.util
 from PIL import Image
+from bs4 import BeautifulSoup
 
 # Laad configuratie
 
@@ -134,6 +135,51 @@ def create_responsive_images(input_path, output_base, sizes):
         }
 
     return results
+
+def process_gallery_images(html, post_slug):
+    soup = BeautifulSoup(html, "html.parser")
+
+    gallery_items = soup.select(".gallery-item")
+
+    for i, item in enumerate(gallery_items):
+        filename = item["data-image"]
+        input_path = os.path.join(STATIC_DIR, filename)
+
+        output_base = os.path.join(
+            OUTPUT_DIR, "static/gallery", f"{post_slug}-{i}"
+        )
+
+        sizes = {
+            "small": 300,
+            "medium": 600,
+            "large": 1200
+        }
+
+        generated = create_responsive_images(input_path, output_base, sizes)
+
+        # HTML vervangen door <picture>
+
+        picture_html = f"""
+<picture>
+    <source type="image/webp"
+        srcset="{generated['small']['webp']} 300w,
+                {generated['medium']['webp']} 600w,
+                {generated['large']['webp']} 1200w"
+        sizes="(max-width: 600px) 100vw, 300px">
+
+    <source type="image/jpeg"
+        srcset="{generated['small']['jpg']} 300w,
+                {generated['medium']['jpg']} 600w,
+                {generated['large']['jpg']} 1200w"
+        sizes="(max-width: 600px) 100vw, 300px">
+
+    <img src="{generated['medium']['jpg']}" loading="lazy" alt="">
+</picture>
+"""
+        
+        item.replace_with(BeautifulSoup(picture_html, "html.parser"))
+
+    return str(soup)
 
 
 # Laad alle posts en sorteer ze op datum
