@@ -5,7 +5,7 @@ import html
 
 def apply(html_text):
     pattern = re._compile(
-        r'\{\{\s*gallery\s*+images="(.*?)"\s*\}\}'
+        r'\{\{\s*gallery\s*+images="(.*?)"\s*\}\}', re.DOTALL
     )
 
     def replacer(match):
