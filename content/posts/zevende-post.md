@@ -1,9 +1,9 @@
 ---
-title: Mijn zevende post
-date: 2026-03-18
+title: Mijn zevende post- code
+date: 2026-03-19
 tags: [python, post]
 draft: true
-publish_date: 2026-03-18
+publish_date: 2026-03-19
 ---
 Welkom bij mijn zevende blogpost. Dit is **Markdown**.
 

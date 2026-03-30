@@ -257,7 +257,7 @@ def render_post(post):
     template = env.get_template('post.html')
     html = template.render(title=post['title'], site=CONFIG['site'], menu=CONFIG['menu'],
                            content=post['html'], 
-                           date=post['date'].strftime('%Y-%m-%d'), tags=post["tags"], post=post)
+                           date=post['date'].strftime('%Y-%m-%d'), tags=post["tags"], post=post, hero=post.get("hero"))
     
     url_pattern = CONFIG['blog']['post_url']
     out_dir = os.path.join(OUTPUT_DIR, url_pattern.format(slug=post["slug"]))

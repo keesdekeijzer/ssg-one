@@ -17,11 +17,11 @@ def apply(html_text):
         # De daadwerkelijke responsive <picture> tags worden door de build gegenereerd
 
         items = "".join(
-            f'<div class="gallery-item" data-image="{html.escape(img)}"></div>'
+            f'\n<div class="gallery-item" data-image="{html.escape(img)}"></div>\n'
             for img in images
         )
 
-        return f'<div class="gallery">{items}</div'
+        return f'\n<div class="gallery">{items}</div>\n'
     
     return pattern.sub(replacer, html_text)
 

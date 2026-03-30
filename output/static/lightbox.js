@@ -322,35 +322,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const img = lightbox.querySelector(".lightbox-content img");
             const touch = e.touches[0];
+            const rect = img.getBoundingClientRect();
 
             cancelAnimationFrame(animationFrame);
 
+            const offsetX = touch.clientX - rect.left;
+            const offsetY = touch.clientY - rect.top;
+
             if (scale == 1) {
                 //scale = doubleTapZoom;
+                const targetScale = doubleTapZoom;
 
-                const rect = img.getBoundingClientRect();
+                //const rect = img.getBoundingClientRect();
                 const offsetX = touch.clientX - rect.left - rect.width / 2;
                 const offsetY = touch.clientY - rect.top - rect.height / 2;
 
-                panX = -offsetX * (doubleTapZoom - 1);
-                panY = -offsetY * (doubleTapZoom - 1);
+                panX = -offsetX * (targetScale - 1);
+                panY = -offsetY * (targetScale - 1);
 
-                animateZoom(1, doubleTapZoom);
+                animateZoom(1, targetScale);
             } else {
-                //scale = 1;
-                animateZoom(scale, 1);
-                panX = 0;
-                panY = 0;
+                const targetScale = Math.min(scale * 1.6, 4);
+
+                const offsetX = tapX - rect.width / 2;
+                const offsetY = tapY - rect.height / 2;
+
+                panX -= offsetX * (targetScale / scale - 1);
+                panY -= offsetY * (targetScale / scale - 1);
+
+                animateZoom(scale, targetScale);
+
             }
 
-            //clampPan();
-            //updateTransform();
+            clampPan();
+            updateTransform();
             lastTapTime = now;
             return;
         }
 
         lastTapTime = now;
-    })
+    });
 
 
     document.querySelectorAll(".gallery picture").forEach((pic, i) => {

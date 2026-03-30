@@ -6,11 +6,47 @@
         <description>Welkom op mijn persoonlijke blog.</description>
         
         <item>
-            <title>Mijn achtste post</title>
+            <title>Mijn achtste post - gallery</title>
             <link>https://localhost:5500/posts/achtste-post/</link>
-            <pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate>
+            <pubDate>Sat, 28 Mar 2026 00:00:00 +0000</pubDate>
             <description><![CDATA[<p>Welkom bij mijn achtste blogpost. Dit is <strong>Markdown</strong>.</p>
-<p><div class="gallery"><div class="gallery-item" data-image="img1.jpg"></div><div class="gallery-item" data-image="img2.jpg"></div><div class="gallery-item" data-image="img3.jpg"></div></div</p>]]></description>
+<p>
+<div class="gallery">
+<div class="gallery-item" data-image="img1.jpg"></div>
+
+<div class="gallery-item" data-image="img2.jpg"></div>
+
+<div class="gallery-item" data-image="img3.jpg"></div>
+</div>
+</p>
+<p>Deze pagina moet een gallery hebben.</p>]]></description>
+        </item>
+        
+        <item>
+            <title>Mijn tiende post - warning - hero</title>
+            <link>https://localhost:5500/posts/tiende-post/</link>
+            <pubDate>Sun, 22 Mar 2026 00:00:00 +0000</pubDate>
+            <description><![CDATA[<p>Welkom bij mijn tiende blogpost. Dit is <strong>Markdown</strong>.</p>
+<p><div class="warning">Dit is belangrijk!</div></p>
+<p>Deze pagina moet een hero image hebben.</p>]]></description>
+        </item>
+        
+        <item>
+            <title>Mijn negende post- button</title>
+            <link>https://localhost:5500/posts/negende-post/</link>
+            <pubDate>Fri, 20 Mar 2026 00:00:00 +0000</pubDate>
+            <description><![CDATA[<p>Welkom bij mijn negende blogpost. Dit is <strong>Markdown</strong>.</p>
+<p><div class="warning">Dit is een waarschuwing! ! !</div></p>
+<p><a href="/files/app.zip" class="btn btn-primary">Download</a></p>]]></description>
+        </item>
+        
+        <item>
+            <title>Mijn zevende post- code</title>
+            <link>https://localhost:5500/posts/zevende-post/</link>
+            <pubDate>Thu, 19 Mar 2026 00:00:00 +0000</pubDate>
+            <description><![CDATA[<p>Welkom bij mijn zevende blogpost. Dit is <strong>Markdown</strong>.</p>
+<p><pre class="code-block"><code class="python">def hello():
+    print(&quot;Hallo Wereld!&quot;)</code></pre></p>]]></description>
         </item>
         
         <item>
@@ -21,28 +57,10 @@
         </item>
         
         <item>
-            <title>Mijn negende post</title>
-            <link>https://localhost:5500/posts/negende-post/</link>
-            <pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate>
-            <description><![CDATA[<p>Welkom bij mijn negende blogpost. Dit is <strong>Markdown</strong>.</p>
-<p><div class="warning">Dit is een waarschuwing! ! !</div></p>
-<p><a href="/files/app.zip" class="btn btn-primary">Download</a></p>]]></description>
-        </item>
-        
-        <item>
             <title>Mijn zesde post</title>
             <link>https://localhost:5500/posts/zesde-post/</link>
             <pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate>
             <description><![CDATA[<p>Welkom bij mijn zesde blogpost. Dit is <strong>Markdown</strong>.</p>]]></description>
-        </item>
-        
-        <item>
-            <title>Mijn zevende post</title>
-            <link>https://localhost:5500/posts/zevende-post/</link>
-            <pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate>
-            <description><![CDATA[<p>Welkom bij mijn zevende blogpost. Dit is <strong>Markdown</strong>.</p>
-<p><pre class="code-block"><code class="python">def hello():
-    print(&quot;Hallo Wereld!&quot;)</code></pre></p>]]></description>
         </item>
         
         <item>
@@ -64,14 +82,6 @@
             <link>https://localhost:5500/posts/elfde-post/</link>
             <pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate>
             <description><![CDATA[<p>Welkom bij mijn elfde blogpost. Dit is <strong>Markdown</strong>.</p>]]></description>
-        </item>
-        
-        <item>
-            <title>Mijn tiende post</title>
-            <link>https://localhost:5500/posts/tiende-post/</link>
-            <pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate>
-            <description><![CDATA[<p>Welkom bij mijn tiende blogpost. Dit is <strong>Markdown</strong>.</p>
-<p><div class="warning">Dit is belangrijk!</div></p>]]></description>
         </item>
         
         <item>
