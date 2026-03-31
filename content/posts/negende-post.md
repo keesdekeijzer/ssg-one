@@ -4,6 +4,7 @@ date: 2026-03-20
 tags: [python, post]
 draft: true
 publish_date: 2026-03-20
+hero: images/posts/default.jpg
 ---
 Welkom bij mijn negende blogpost. Dit is **Markdown**.
 

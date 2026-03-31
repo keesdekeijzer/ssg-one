@@ -7,6 +7,6 @@ publish_date: 2026-03-28
 ---
 Welkom bij mijn achtste blogpost. Dit is **Markdown**.
 
-{{ gallery images="img1.jpg,img2.jpg,img3.jpg" }}
+{{ gallery images="images/img1.jpg,images/img2.jpg,images/img3.jpg" }}
 
 Deze pagina moet een gallery hebben.

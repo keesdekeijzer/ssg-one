@@ -79,9 +79,9 @@ def load_shortcodes():
     return modules
 
 def apply_shortcodes(html, shortcode_modules):
-    print("apply_shortcodes: ",shortcode_modules)
+    # print("apply_shortcodes: ",shortcode_modules)
     for mod in shortcode_modules:
-        print("apply shortcodes: ",mod)
+        # print("apply shortcodes: ",mod)
         if hasattr(mod, "apply"):
             html = mod.apply(html)
     return html
@@ -108,7 +108,7 @@ def create_thumbnail(input_path, output_base, width=400):
 # responsive images
 
 def create_responsive_images(input_path, output_base, sizes):
-    print("input_path: ", input_path)
+    # print("input_path: ", input_path)
     img = Image.open(input_path)
 
     results = {}
@@ -159,21 +159,34 @@ def process_gallery_images(html, post_slug):
 
         # HTML vervangen door <picture>
 
+        # in de onderstaande paden moet 'output/' verwijderd worden omdat de uiteindelijke URL anders is dan het pad op schijf
+
+        src10 = f"/{generated['small']['webp']}".replace("output/", "")
+        src11 = f"/{generated['medium']['webp']}".replace("output/", "")
+        src12 = f"/{generated['large']['webp']}".replace("output/", "")
+
+        src20 = f"/{generated['small']['jpg']}".replace("output/", "")
+        src21 = f"/{generated['medium']['jpg']}".replace("output/", "")
+        src22 = f"/{generated['large']['jpg']}".replace("output/", "")
+
+        src3 = f"/{generated['medium']['jpg']}".replace("output/", "")
+
+
         picture_html = f"""
 <picture>
     <source type="image/webp"
-        srcset="{generated['small']['webp']} 300w,
-                {generated['medium']['webp']} 600w,
-                {generated['large']['webp']} 1200w"
+        srcset="{src10} 300w,
+                {src11} 600w,
+                {src12} 1200w"
         sizes="(max-width: 600px) 100vw, 300px">
 
     <source type="image/jpeg"
-        srcset="{generated['small']['jpg']} 300w,
-                {generated['medium']['jpg']} 600w,
-                {generated['large']['jpg']} 1200w"
+        srcset="{src20} 300w,
+                {src21} 600w,
+                {src22} 1200w"
         sizes="(max-width: 600px) 100vw, 300px">
 
-    <img src="{generated['medium']['jpg']}" loading="lazy" alt="">
+    <img src="{src3}" loading="lazy" alt="">
 </picture>
 """
         
@@ -203,6 +216,10 @@ def load_posts(SHORTCODES):
 
         # hero = metadata.get("hero")
         hero = post.get("hero")
+        if not hero :
+            hero = "images/posts/default.jpg"
+
+        post["hero"] = hero
 
         if hero:
             print("post", slug)
@@ -232,6 +249,7 @@ def load_posts(SHORTCODES):
                 for size in generated
             }
 
+        print("post:", post["slug"], "images:", post["images"] if "images" in post else "geen images")
 
 
 
@@ -241,7 +259,9 @@ def load_posts(SHORTCODES):
             'date': date,
             'slug': slug,
             'html': html,
-            'tags': post.get('tags', []),
+            'tags': post.get('tags', [],),
+            'hero': post.get('hero'),
+            'images': post.get('images', {})
         })
 
         # post["hero"] = metadata.get("hero", "/static/images/default.jpg")
@@ -255,9 +275,19 @@ def load_posts(SHORTCODES):
 
 def render_post(post):
     template = env.get_template('post.html')
+    # print("post:", post)
+
+    hero = post.get("hero")
+    if hero:
+        post["html"] = process_gallery_images(post["html"], post["slug"])
+        print("hero:", hero)
+    else:
+        print("geen hero voor post:", post["slug"])
+        hero = '/static/images/default.jpg'
+
     html = template.render(title=post['title'], site=CONFIG['site'], menu=CONFIG['menu'],
                            content=post['html'], 
-                           date=post['date'].strftime('%Y-%m-%d'), tags=post["tags"], post=post, hero=post.get("hero"))
+                           date=post['date'].strftime('%Y-%m-%d'), tags=post["tags"], post=post, hero=hero)
     
     url_pattern = CONFIG['blog']['post_url']
     out_dir = os.path.join(OUTPUT_DIR, url_pattern.format(slug=post["slug"]))
@@ -368,7 +398,7 @@ def render_search_index(posts):
 
 def build():
     SHORTCODES = load_shortcodes()
-    print(SHORTCODES)
+    # print(SHORTCODES)
     plugins = load_plugins()
     for plugin in plugins:
         plugin.run({"posts": posts, "config": CONFIG, "output": OUTPUT_DIR})
