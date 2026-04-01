@@ -222,11 +222,11 @@ def load_posts(SHORTCODES):
         post["hero"] = hero
 
         if hero:
-            print("post", slug)
+            #print("post", slug)
             # Pad naar originele afbeelding
             input_path = os.path.join(STATIC_DIR, hero.lstrip("/"))
-            print("STATIC_DIR", STATIC_DIR)
-            print("hero.lstrip(/)", hero.lstrip("/"))
+            #print("STATIC_DIR", STATIC_DIR)
+            #print("hero.lstrip(/)", hero.lstrip("/"))
 
 
             # Pad naar thumbnail
@@ -249,7 +249,7 @@ def load_posts(SHORTCODES):
                 for size in generated
             }
 
-        print("post:", post["slug"], "images:", post["images"] if "images" in post else "geen images")
+        #print("post:", post["slug"], "images:", post["images"] if "images" in post else "geen images")
 
 
 
@@ -261,7 +261,10 @@ def load_posts(SHORTCODES):
             'html': html,
             'tags': post.get('tags', [],),
             'hero': post.get('hero'),
-            'images': post.get('images', {})
+            'images': post.get('images', {}),
+            'draft': post.get('draft', False),
+            'publish_date': post.get('publish_date'),
+            'summery': post.get('summary', "")
         })
 
         # post["hero"] = metadata.get("hero", "/static/images/default.jpg")
@@ -280,9 +283,9 @@ def render_post(post):
     hero = post.get("hero")
     if hero:
         post["html"] = process_gallery_images(post["html"], post["slug"])
-        print("hero:", hero)
+        #print("hero:", hero)
     else:
-        print("geen hero voor post:", post["slug"])
+        #print("geen hero voor post:", post["slug"])
         hero = '/static/images/default.jpg'
 
     html = template.render(title=post['title'], site=CONFIG['site'], menu=CONFIG['menu'],
@@ -307,7 +310,7 @@ def render_index(posts):
             pattern = CONFIG['blog']['pagination_url']
 
             out_dir = os.path.join(OUTPUT_DIR, pattern.format(num=i))
-        print("page:",i)
+        #print("page:",i)
         html = template.render(posts=page_posts, 
                                page=i, 
                                total_pages=len(pages),

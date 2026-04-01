@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let startX = 0;
     let scale = 1;
     let startDistance = 0;
+    let factor = 1;
 
     let panX = 0;
     let panY = 0;
@@ -195,7 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
     lightbox.addEventListener("touchmove", () => {
         showTouchOverlay();
     })
-(factor, 1)
+    // (factor, 1)
     lightbox.addEventListener("touchstart", e => {
         if (e.touches.length == 2) {
             startDistance = getDistance(e.touches);
