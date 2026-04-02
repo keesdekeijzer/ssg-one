@@ -8,24 +8,24 @@
 
     <article class="post-card">
 
-        {% if post.thumb_jpg %}
+        {% if post.hero %}
         <a href="{{ post.url }}">
             <picture>
                 <source type="image/webp"
                 srcset="
-                {{ post.thumb_webp }} 300w,
-                {{ post.thumb_webp }} 600w
+                {{ post.images.small.webp }} 300w,
+                {{ post.images.medium.webp }} 600w
                 "
                 sizes="(max-width: 600px) 100vw, 300px">
 
                 <source type="image/jpeg"
                 srcset="
-                {{ post.thumb_jpg }} 300w,
-                {{ post.thumb_jpg }} 600w
+                {{ post.images.small.jpg }} 300w,
+                {{ post.images.medium.jpg }} 600w
                 "
                 sizes="(max-width: 600px) 100vw, 300px">
 
-                <img class="thumb" src="{{ post.thumb_jpg }}" alt="{{ post.title }}" loading="lazy">
+                <img class="thumb" src="{{ post.images.medium.jpg }}" alt="{{ post.title }}" loading="lazy">
             </picture>
         </a>
         {% else %}

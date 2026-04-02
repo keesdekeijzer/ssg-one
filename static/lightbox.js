@@ -310,9 +310,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    lightbox.addEventListener("touchstart", () => {
-        cancelAnimationFrame(momentumFrame);
-    });
 
     lightbox.addEventListener("touchstart", e => {
         const now = performance.now();

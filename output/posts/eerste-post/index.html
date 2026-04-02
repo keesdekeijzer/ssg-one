@@ -27,7 +27,7 @@
 
   
   <div>
-    <img src="images/posts/default.jpg" alt="Mijn eerste post">
+    
     <picture>
       <source type="image/webp"
       srcset="
@@ -52,9 +52,84 @@
   
 
   <h1>Mijn eerste post</h1>
-  <p class="post-date">2026-03-16</p>
+  <p class="post-date">2026-04-01</p>
 
-  <div class="post-content"><p>Welkom bij mijn eerste blogpost. Dit is <strong>Markdown</strong>.</p></div>
+  <div class="post-content"><p>Welkom bij mijn eerste blogpost. Dit is <strong>Markdown</strong>.</p>
+<h1>SSG-ONE</h1>
+<p>Static Site Generator</p>
+<h2>Directory structuur</h2>
+<ul>
+<li>'content/posts/' Markdown-bestanden met metadata (titel, datum, tags)</li>
+<li>'content/pages/' Markdown-bestanden met metadata (titel, datum, tags)</li>
+<li>'templates/' met Jinja2, voor bijvoorbeeld 'base.html' en 'post.html'</li>
+<li>'static' assets zoals CSS, JS, Afbeeldingen</li>
+<li>'output/' waar de uiteindelijke HTML pagina's worden weggeschreven</li>
+</ul>
+<h2>Acties</h2>
+<ul>
+<li>Markdown inlezen</li>
+<li>Metadata (frontmatter) scheiden van de tekst</li>
+<li>Markdown naar HTML omzetten</li>
+<li>Elke pagina wegschrijven als 'index.html' naar een eigen directory zodat je mooie urls krijgt</li>
+<li>Alles uit 'static/' kopieren naar 'output/static/'</li>
+</ul>
+<h2>Python libraries</h2>
+<ul>
+<li>'markdown' voor de omzetting van Markdown naar HTML</li>
+<li>'python-frontmatter' voor de metadata</li>
+<li>'jinja2' voor de templates</li>
+</ul>
+<h2>Build functie</h2>
+<ul>
+<li>Door alle bestanden in 'content/' lopen</li>
+<li>Voor elk bestand HTML generen</li>
+<li>Templates toepassen</li>
+<li>Assets kopieren</li>
+</ul>
+<h2>Extra functionaliteit</h2>
+<ul>
+<li>Blog index pagina's</li>
+<li>Tag pagina's</li>
+<li>RSS feed</li>
+<li>Sitemap.xml</li>
+<li>Live reload server</li>
+<li>Caching (alleen gewijzigde bestanden opnieuw generen)</li>
+<li>Plugin systeem voor uitbreidingen</li>
+</ul>
+<h2>CLI-tool</h2>
+<p>Commandline interface met bijvoorbeeld: <em>ssg-one build</em>, <em>ssg-one serve</em> en '<em>sg-one new post 'titel'</em>.</p>
+<h2>Configuratie</h2>
+<p>Configuratie via een 'config.yaml' bestand.</p>
+<ul>
+<li>sitetitel en beschrijving</li>
+<li>basis-URL</li>
+<li>paden voor content, templates en output</li>
+<li>menu's (navigatie)</li>
+<li>bloginstellingen (aantal posts op index, sortering)</li>
+<li>URL-structuur (bijvoorbeeld '/blog/slug/' i.p.v. '/posts/slug/')</li>
+</ul>
+<h2>Live development server</h2>
+<p>Een lokale webserver die automatisch ververst als je iets aanpast.</p>
+<p>Nodig:
+- watchdog : voor het opmerken van bestandswijzigingen
+- livereload : server draaien en browser verversen</p>
+<h2>Gebruik</h2>
+<p>Normaal builden:</p>
+<p><code>python ssg-one.py</code></p>
+<p>Live server starten:</p>
+<p><code>python ssg-one serve</code></p>
+<p>Website wordt automatisch opnieuw gegenereerd op http://localhost:5500</p>
+<h2>Shortcodes</h2>
+<p>Een directory shortcodes/ met 1 Python bestand per shortcode.</p>
+<p>Een loader die alle shortcodes aytomatisch laadt.</p>
+<p>Een centrale functie die shortcodes toepast op HTML.</p>
+<h3>button.py</h3>
+<p>voorbeeld:</p>
+<p>tussen {{ en }}:</p>
+<p><code>button text="Lees meer" url="/about/"</code></p>
+<p>voorbeeld met stijl:</p>
+<p>tussen {{ en }}:</p>
+<p><code>button text="Download" url="/files/app.zip" style="primary"</code></p></div>
 
   
     <p class="tags">Tags: 

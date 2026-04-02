@@ -88,6 +88,55 @@ Een loader die alle shortcodes aytomatisch laadt.
 
 Een centrale functie die shortcodes toepast op HTML.
 
+### button.py
+
+voorbeeld:
+
+```
+{{ button text="Lees meer" url="/about/" }}
+```
+
+voorbeeld met stijl:
+
+```
+{{ button text="Download" url="/files/app.zip" style="primary" }}
+```
+
+### codeblock.py
+
+voorbeeld:
+
+```
+{{ code lang="python" }}
+def hello():
+    print("Hallo Wereld!")
+{{ endcode }}
+```
+
+### gallery.py
+
+voorbeeld:
+
+```
+{{ gallery images="img1.jpg,img2.jpg,img3.jpg" }}
+```
+
+### warning.py
+
+voorbeeld:
+
+```
+{{ warning text="..." }}
+```
+
+### youtube.py
+
+voorbeeld:
+
+```
+{{ youtube(id="abc123") }}
+```
+
 
 ## Syntax highlighting
 
