@@ -6,6 +6,15 @@
         <description>Welkom op mijn persoonlijke blog.</description>
         
         <item>
+            <title>Mijn zevende post - code</title>
+            <link>https://localhost:5500/posts/zevende-post/</link>
+            <pubDate>Thu, 02 Apr 2026 00:00:00 +0000</pubDate>
+            <description><![CDATA[<p>Welkom bij mijn zevende blogpost. Dit is <strong>Markdown</strong>.</p>
+<p><pre class="code-block"><code class="python">def hello():
+    print("Hallo Wereld!")</code></pre></p>]]></description>
+        </item>
+        
+        <item>
             <title>Mijn eerste post</title>
             <link>https://localhost:5500/posts/eerste-post/</link>
             <pubDate>Wed, 01 Apr 2026 00:00:00 +0000</pubDate>
@@ -148,15 +157,6 @@
             <description><![CDATA[<p>Welkom bij mijn negende blogpost. Dit is <strong>Markdown</strong>.</p>
 <p><div class="warning">Dit is een waarschuwing! ! !</div></p>
 <p><a class="btn btn-primary" href="/files/app.zip">Download</a></p>]]></description>
-        </item>
-        
-        <item>
-            <title>Mijn zevende post- code</title>
-            <link>https://localhost:5500/posts/zevende-post/</link>
-            <pubDate>Thu, 19 Mar 2026 00:00:00 +0000</pubDate>
-            <description><![CDATA[<p>Welkom bij mijn zevende blogpost. Dit is <strong>Markdown</strong>.</p>
-<p><pre class="code-block"><code class="python">def hello():
-    print("Hallo Wereld!")</code></pre></p>]]></description>
         </item>
         
         <item>

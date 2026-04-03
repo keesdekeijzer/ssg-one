@@ -264,7 +264,7 @@ def load_posts(SHORTCODES):
             'images': post.get('images', {}),
             'draft': post.get('draft', False),
             'publish_date': post.get('publish_date'),
-            'summery': post.get('summary', "")
+            'summary': post.get('summary', "")
         })
 
         # post["hero"] = metadata.get("hero", "/static/images/default.jpg")
