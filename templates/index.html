@@ -36,9 +36,9 @@
     <h2>
         <a href="/posts/{{ post.slug }}/">{{ post.title }}</a>
     </h2>
+   
+    <p><small>{{ post.date.strftime("%Y-%m-%d") }}</small></p>
     <p>{{ post.summary }} ...</p>
-        <p><small>{{ post.date.strftime("%Y-%m-%d") }}</small></p>
-    
     </article>
     {% endfor %}
 </ul>

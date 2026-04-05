@@ -4,6 +4,8 @@ date: 2026-03-28
 tags: [python, post]
 draft: true
 publish_date: 2026-03-28
+summary: achtste blogpost met een gallery
+hero: images/posts/default2.jpg
 ---
 Welkom bij mijn achtste blogpost. Dit is **Markdown**.
 

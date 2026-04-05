@@ -1,12 +1,14 @@
 let fuse;
 let data = [];
 
+
+
 fetch("/search.json")
     .then(r => r.json())
     .then(json => {
         data = json;
 
-        fuse = new fuse(data, {
+        fuse = new fuse(data, {  // Uncaught (in promise) TypeError: fuse is not a constructor
             keys: [
                 { name: "title", weight: 0.5 },
                 { name: "content", weight: 0.1 },

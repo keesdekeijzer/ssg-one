@@ -24,5 +24,11 @@ menu:
     url: "/"
   - name: "Over"
     url: "/about/"
+  - name: "RSS"
+    url: "/feed.xml"
+  - name: "Sitemap"
+    url: "/sitemap.xml"
+  - name: "Search"
+    url: "/search/"
 
   

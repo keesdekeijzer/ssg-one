@@ -5,6 +5,7 @@ tags: [python, post]
 draft: true
 publish_date: 2026-03-20
 hero: images/posts/default.jpg
+summary: negende blogpost
 ---
 Welkom bij mijn negende blogpost. Dit is **Markdown**.
 

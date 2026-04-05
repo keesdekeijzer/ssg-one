@@ -399,6 +399,13 @@ def render_search_index(posts):
     write_file(os.path.join(OUTPUT_DIR, "search.json"), json.dumps(items))
 
 
+def render_search():
+    template = env.get_template("search.html")
+    html = template.render(site=CONFIG['site'], menu=CONFIG['menu'], title="Search")
+    out_dir = os.path.join(OUTPUT_DIR, "search")
+    write_file(os.path.join(out_dir, "index.html"), html)
+
+
 def build():
     SHORTCODES = load_shortcodes()
     # print(SHORTCODES)
@@ -428,6 +435,7 @@ def build():
     render_rss(posts)
     render_sitemap(posts)
     render_search_index(posts)
+    render_search()
 
     print("Site gegenereerd in de map 'output'.")
 

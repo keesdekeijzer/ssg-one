@@ -5,8 +5,7 @@ date: 2026-03-22
 tags: [python, post]
 draft: true
 publish_date: 2026-03-22
-
-extra: hallo
+summary: tiende blogpost met een warning
 ---
 Welkom bij mijn tiende blogpost. Dit is **Markdown**.
 
