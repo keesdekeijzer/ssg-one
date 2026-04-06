@@ -365,6 +365,7 @@ def render_pages(SHORTCODES):
 
 def render_search_index(posts):
     items = []
+    words_index = {}
 
     # posts
 
@@ -378,6 +379,37 @@ def render_search_index(posts):
             "summary": post.get("summary", ""),
             "hero": post.get("hero")
         })
+
+
+        title_words = post["title"].split()
+        content_words = re.findall(r'\w+', BeautifulSoup(post["html"], "html.parser").get_text())
+        summary_words = post.get("summary", "").split()
+        for word in title_words:
+            word = word.lower()
+            combo = (post["slug"], word)
+            if combo in words_index:
+                words_index[combo] = words_index[combo] +3
+            else:
+                words_index[combo] = 3
+        for word in summary_words:
+            word = word.lower()
+            combo = (post["slug"], word)
+            if combo in words_index:
+                words_index[combo] = words_index[combo] + 2
+            else:
+                words_index[combo] = 2
+        for word in content_words:
+            word = word.lower()
+            combo = (post["slug"], word)
+            if combo in words_index:
+                words_index[combo] = words_index[combo] + 1
+            else:
+                words_index[combo] = 1
+
+    
+    for _, __ in words_index.items():
+        print("\n woorden in index:", _, __)
+
 
     # pages
 
@@ -398,10 +430,17 @@ def render_search_index(posts):
 
     write_file(os.path.join(OUTPUT_DIR, "search.json"), json.dumps(items))
 
+    return words_index
 
-def render_search():
+
+def create_search_js(words_index):
+    ...
+    
+
+
+def render_search(words_index):
     template = env.get_template("search.html")
-    html = template.render(site=CONFIG['site'], menu=CONFIG['menu'], title="Search")
+    html = template.render(site=CONFIG['site'], menu=CONFIG['menu'], title="Search", words_index=words_index)
     out_dir = os.path.join(OUTPUT_DIR, "search")
     write_file(os.path.join(out_dir, "index.html"), html)
 
@@ -434,8 +473,8 @@ def build():
     render_pages(SHORTCODES)
     render_rss(posts)
     render_sitemap(posts)
-    render_search_index(posts)
-    render_search()
+    words_index = render_search_index(posts)
+    render_search(words_index)
 
     print("Site gegenereerd in de map 'output'.")
 
