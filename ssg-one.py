@@ -434,8 +434,98 @@ def render_search_index(posts):
 
 
 def create_search_js(words_index):
-    ...
-    
+    search_js ="""
+document.getElementById("searchForm").addEventListener("submit", search);
+function search() {var terms = new Array();
+var pages = new Array();
+var notfoundtext = "No results found";
+var foundtext = "Resultaten:";
+"""
+    pages_set = set(slug for slug, _ in words_index.keys())
+    pages_numbered = {slug: i for i, slug in enumerate(pages_set)}
+    print("\n\npages in search index:", pages_set)
+    print("\n\npages numbered:", pages_numbered)
+    term_nr = 0
+    for pagina_woord, aantal in words_index.items(): # (pagina, woord) aantal
+        term_nr += 1
+        slug, woord = pagina_woord
+        page_num = pages_numbered[slug]
+        #print(f"\npagina: {slug} (page num: {page_num}), woord: {woord}, aantal: {aantal}")
+        regel = (f"terms[{term_nr}] = new Array();terms[{term_nr}]['word'] = '{woord}';terms[{term_nr}]['count'] = {aantal};terms[{term_nr}]['page'] = '{page_num}';")
+        print(regel)
+        search_js += regel + "\n"
+    for slug, page_num in pages_numbered.items():
+        #print(f"pages[{page_num}] = '{slug}';")
+        regel = (f"pages[{page_num}] = new Array();pages[{page_num}]['page'] = '/posts/{slug}/';pages[{page_num}]['title'] = '{slug}';")
+        print(regel)
+        search_js += regel + "\n"
+
+    search_js += """
+
+        var input = document.getElementById('searchbar').value.toLowerCase();
+        const input_array = input.split(" ");
+        var number_of_search_items = input_array.length;
+        var item=0;
+        var i=0;
+        var list="";
+        var pos=-1;
+        var max = terms.length;
+        var results = new Array();
+        var number_of_results=0;
+        var final_results = new Array();
+        var page_titles = new Array();
+        event.preventDefault();
+        for(item=0; item<number_of_search_items; item++){
+            if(input_array[item]!="") {
+                for(i=1; i<max; i++) { 
+                    if(input_array[item]==terms[i]['word']){
+                        number_of_results +=1;
+                        if (!final_results[terms[i]['page']]){
+                            final_results[terms[i]['page']] = 0
+                        }
+                        final_results[terms[i]['page']] = final_results[terms[i]['page']] + terms[i]['count']
+                        results[terms[i]['page']] = terms[i]['count']
+                        page_titles[terms[i]['page']] = pages[terms[i]['page']]['title'];
+                    }   
+                    pos=-1;
+                }
+            }
+        }
+        // determine highest score
+        var highest = 0;
+        for (var k in final_results){
+            if (final_results.hasOwnProperty(k)) {
+                 if (final_results[k] > highest) {
+                    highest = final_results[k];
+                 }
+            }
+        }
+       
+        list = ""
+        for (i=highest; i>0; i--) {
+            for (var k in final_results){
+                if (final_results.hasOwnProperty(k)) {
+                    if (final_results[k] == i) {
+                         list= list + '(' + final_results[k] + ') <a href="' + pages[k]['page'] + '">'+ page_titles[k] + '</a>' + '<br>';
+                    }
+                 }
+            }
+        }
+        if(list==""){ 
+            document.getElementById("listing").innerHTML = "<span class='red_msg'>" + notfoundtext + "</span>";
+            document.getElementById("listing").style.display = "block";
+        } else { 
+            results = '<h2>' + foundtext + '</h2>' + list;
+            document.getElementById("listing").innerHTML = results;
+            document.getElementById("listing").style.display = "block";
+        }
+    }
+    """    
+    # Schrijf de gegenereerde JavaScript naar een bestand
+    out_dir = os.path.join(OUTPUT_DIR, "search")
+    ensure_dir(out_dir)
+
+    write_file(os.path.join(out_dir, "search.js"), search_js)
 
 
 def render_search(words_index):
@@ -475,6 +565,7 @@ def build():
     render_sitemap(posts)
     words_index = render_search_index(posts)
     render_search(words_index)
+    create_search_js(words_index)
 
     print("Site gegenereerd in de map 'output'.")
 

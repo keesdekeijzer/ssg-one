@@ -2,23 +2,13 @@
 
 {% block content %}
 <h2>Zoeken</h2>
-<input id="searchbox" placeholder="Zoek ..." />
-
-<ul id="results"></ul>
-
-<div id="listing"></div> <!-- results will be displayed here -->
-<p>&nbsp;</p>
 
 <form id="searchForm" action="../search/index.html" method="get">
-<label for=""Search">Zoeken</label><br>&nbsp;<br>
-<input type="search" id="searchbar" placeholder="Zoek..." aria-label="Search"><br>
-<button type="submit" class="btn-primary">Zoeken</button>
+<input type="search" id="searchbar" placeholder="Wat zoek je?" aria-label="Search"><br>
+<button type="submit" class="btn btn-primary">Zoeken</button>
 </form>
 
-<div id="no-results" style="display: none;">Geen resultaten gevonden.</div>
+<div id="listing"></div> <!-- results will be displayed here -->
 
-<div id="search-index" >{{ words_index }}</div>
-
-<script src="/static/fuse.js"></script>
-<script src="/static/search.js"></script>
+<script src="search.js"></script>
 {% endblock %}

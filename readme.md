@@ -144,10 +144,6 @@ Deze kan worden toegevoegd via Prism.js of Highlight.js
 
 ## Zoekfunctie
 
-Zoekfunctie met Fuse.js
+Met javascript.
 
-- fouttolerantie
-- ranking op relevantie
-- weging van velden
-- snelle client-side filtering zonder backend
 
