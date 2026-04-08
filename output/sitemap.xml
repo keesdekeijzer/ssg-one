@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url><loc>https://localhost:5500/</loc></url>
 <url><loc>https://localhost:5500/about/</loc></url>
+<url><loc>https://localhost:5500/contact/</loc></url>
 <url><loc>https://localhost:5500/page/2/</loc></url>
 <url><loc>https://localhost:5500/posts/achtste-post/</loc></url>
 <url><loc>https://localhost:5500/posts/derde-post/</loc></url>
@@ -15,6 +16,7 @@
 <url><loc>https://localhost:5500/posts/vijfde-post/</loc></url>
 <url><loc>https://localhost:5500/posts/zesde-post/</loc></url>
 <url><loc>https://localhost:5500/posts/zevende-post/</loc></url>
+<url><loc>https://localhost:5500/privacy/</loc></url>
 <url><loc>https://localhost:5500/tags/post/</loc></url>
 <url><loc>https://localhost:5500/tags/python/</loc></url>
 </urlset>

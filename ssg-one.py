@@ -289,6 +289,7 @@ def render_post(post):
         hero = '/static/images/default.jpg'
 
     html = template.render(title=post['title'], site=CONFIG['site'], menu=CONFIG['menu'],
+                            menu_footer=CONFIG['menu_footer'],
                            content=post['html'], 
                            date=post['date'].strftime('%Y-%m-%d'), tags=post["tags"], post=post, hero=hero)
     
@@ -316,6 +317,7 @@ def render_index(posts):
                                total_pages=len(pages),
                                site=CONFIG['site'], 
                                menu=CONFIG['menu'], 
+                               menu_footer=CONFIG['menu_footer'],
                                title=f"Blog - Pagina {i}",
                                )
 
@@ -337,6 +339,7 @@ def render_tags(posts):
         
 
         html = template.render(posts=tag_posts, site=CONFIG['site'], menu=CONFIG['menu'], 
+                               menu_footer=CONFIG['menu_footer'],
                                title=f"Posts tagged '{tag}'")
         write_file(os.path.join(out_dir, 'index.html'), html)
 
@@ -356,7 +359,8 @@ def render_pages(SHORTCODES):
         html_content = markdown.markdown(page.content)
         html_content = apply_shortcodes(html_content, SHORTCODES)
 
-        rendered = template.render(title=page.get('title'), content=html_content, site=CONFIG['site'], menu=CONFIG['menu'])
+        rendered = template.render(title=page.get('title'), content=html_content, site=CONFIG['site'], menu=CONFIG['menu'],
+                                   menu_footer=CONFIG['menu_footer'], page=page)
 
         slug = filename.replace('.md', '')
 
@@ -530,7 +534,8 @@ var foundtext = "Resultaten:";
 
 def render_search(words_index):
     template = env.get_template("search.html")
-    html = template.render(site=CONFIG['site'], menu=CONFIG['menu'], title="Search", words_index=words_index)
+    html = template.render(site=CONFIG['site'], menu=CONFIG['menu'], menu_footer=CONFIG['menu_footer'], 
+                           title="Search", words_index=words_index)
     out_dir = os.path.join(OUTPUT_DIR, "search")
     write_file(os.path.join(out_dir, "index.html"), html)
 

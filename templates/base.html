@@ -24,6 +24,13 @@
         
     </main>
     <footer>
+        <div class="menu-footer">
+        <ul>
+            {% for item in menu_footer %}
+            <li><a href="{{ item.url }}">{{ item.name }}</a></li>
+            {% endfor %}
+        </ul>
+        </div
         <p>&copy; {{ site.title }} - {{ site.description }}</p>
     </footer>
 

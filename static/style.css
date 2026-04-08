@@ -6,6 +6,11 @@ body {
     color: #333;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 header {
     background-color: #333;
     color: #fff;
@@ -31,6 +36,23 @@ nav ul li {
 }
 
 nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.menu-footer ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.menu-footer ul li {
+    display: inline;
+}
+
+.menu-footer ul li a {
     color: #fff;
     text-decoration: none;
 }
