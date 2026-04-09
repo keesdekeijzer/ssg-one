@@ -411,8 +411,8 @@ def render_search_index(posts):
                 words_index[combo] = 1
 
     
-    for _, __ in words_index.items():
-        print("\n woorden in index:", _, __)
+    #for _, __ in words_index.items():
+        #print("\n woorden in index:", _, __)
 
 
     # pages
@@ -447,8 +447,8 @@ var foundtext = "Resultaten:";
 """
     pages_set = set(slug for slug, _ in words_index.keys())
     pages_numbered = {slug: i for i, slug in enumerate(pages_set)}
-    print("\n\npages in search index:", pages_set)
-    print("\n\npages numbered:", pages_numbered)
+    #print("\n\npages in search index:", pages_set)
+    #print("\n\npages numbered:", pages_numbered)
     term_nr = 0
     for pagina_woord, aantal in words_index.items(): # (pagina, woord) aantal
         term_nr += 1
@@ -456,12 +456,12 @@ var foundtext = "Resultaten:";
         page_num = pages_numbered[slug]
         #print(f"\npagina: {slug} (page num: {page_num}), woord: {woord}, aantal: {aantal}")
         regel = (f"terms[{term_nr}] = new Array();terms[{term_nr}]['word'] = '{woord}';terms[{term_nr}]['count'] = {aantal};terms[{term_nr}]['page'] = '{page_num}';")
-        print(regel)
+        #print(regel)
         search_js += regel + "\n"
     for slug, page_num in pages_numbered.items():
         #print(f"pages[{page_num}] = '{slug}';")
         regel = (f"pages[{page_num}] = new Array();pages[{page_num}]['page'] = '/posts/{slug}/';pages[{page_num}]['title'] = '{slug}';")
-        print(regel)
+        #print(regel)
         search_js += regel + "\n"
 
     search_js += """

@@ -6,6 +6,15 @@
         <description>Welkom op mijn persoonlijke blog.</description>
         
         <item>
+            <title>Mijn vijfde post - quote</title>
+            <link>https://localhost:5500/posts/vijfde-post/</link>
+            <pubDate>Wed, 08 Apr 2026 00:00:00 +0000</pubDate>
+            <description><![CDATA[<p>Welkom bij mijn vijdfe blogpost. Dit is <strong>Markdown</strong>.</p>
+<p><div class="quotes">Dit is een quote<br/>Met meerdere regels<br/>--John Smith</div></p>
+<p><div class="warning">Dit is een waarschuwing!</div></p>]]></description>
+        </item>
+        
+        <item>
             <title>Mijn zevende post - code</title>
             <link>https://localhost:5500/posts/zevende-post/</link>
             <pubDate>Thu, 02 Apr 2026 00:00:00 +0000</pubDate>
@@ -171,13 +180,6 @@
             <link>https://localhost:5500/posts/zesde-post/</link>
             <pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate>
             <description><![CDATA[<p>Welkom bij mijn zesde blogpost. Dit is <strong>Markdown</strong>.</p>]]></description>
-        </item>
-        
-        <item>
-            <title>Mijn vijfde post</title>
-            <link>https://localhost:5500/posts/vijfde-post/</link>
-            <pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate>
-            <description><![CDATA[<p>Welkom bij mijn vijdfe blogpost. Dit is <strong>Markdown</strong>.</p>]]></description>
         </item>
         
         <item>

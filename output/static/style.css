@@ -123,6 +123,15 @@ footer {
     color: #664d03;
 }
 
+.quotes {
+    background-color: #aacaeb;
+    border-left: 8px solid #aca2a2;
+    padding: 1rem;
+    margin: 1rem 0;
+    color: #555;
+    font-style: italic;
+}
+
 .code-block {
     background: #2d2d2d;
     color: #f8f8f2;

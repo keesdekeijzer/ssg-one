@@ -137,6 +137,12 @@ voorbeeld:
 {{ youtube(id="abc123") }}
 ```
 
+### quote.py
+
+
+```
+{{ quote text="...<br>..." }}
+```
 
 ## Syntax highlighting
 
@@ -146,4 +152,19 @@ Deze kan worden toegevoegd via Prism.js of Highlight.js
 
 Met javascript.
 
+
+## Frontmatter
+
+Voorbeeld:
+
+
+```
+title: Mijn eerste post
+date: 2026-04-01
+tags: [python, post]
+draft: true
+publish_date: 2026-04-01
+summary: eerste blogpost
+hero: images/posts/default2.jpg
+```
 
