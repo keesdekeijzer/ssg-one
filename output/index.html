@@ -34,6 +34,40 @@
     <article class="post-card">
 
         
+        <a href="/posts/derde-post">
+            <picture>
+                <source type="image/webp"
+                srcset="
+                /static/thumbs/derde-post-small.webp 300w,
+                /static/thumbs/derde-post-medium.webp 600w
+                "
+                sizes="(max-width: 600px) 100vw, 300px">
+
+                <source type="image/jpeg"
+                srcset="
+                /static/thumbs/derde-post-small.jpg 300w,
+                /static/thumbs/derde-post-medium.jpg 600w
+                "
+                sizes="(max-width: 600px) 100vw, 300px">
+
+                <img class="thumb" src="/static/thumbs/derde-post-medium.jpg" alt="Mijn derde post" loading="lazy">
+            </picture>
+        </a>
+        
+
+    
+    <h2>
+        <a href="/posts/derde-post/">Mijn derde post</a>
+    </h2>
+   
+    <p><small>2026-04-09</small></p>
+    <p>derde blogpost ...</p>
+    </article>
+    
+
+    <article class="post-card">
+
+        
         <a href="/posts/vijfde-post">
             <picture>
                 <source type="image/webp"
@@ -238,40 +272,6 @@
     <article class="post-card">
 
         
-        <a href="/posts/derde-post">
-            <picture>
-                <source type="image/webp"
-                srcset="
-                /static/thumbs/derde-post-small.webp 300w,
-                /static/thumbs/derde-post-medium.webp 600w
-                "
-                sizes="(max-width: 600px) 100vw, 300px">
-
-                <source type="image/jpeg"
-                srcset="
-                /static/thumbs/derde-post-small.jpg 300w,
-                /static/thumbs/derde-post-medium.jpg 600w
-                "
-                sizes="(max-width: 600px) 100vw, 300px">
-
-                <img class="thumb" src="/static/thumbs/derde-post-medium.jpg" alt="Mijn derde post" loading="lazy">
-            </picture>
-        </a>
-        
-
-    
-    <h2>
-        <a href="/posts/derde-post/">Mijn derde post</a>
-    </h2>
-   
-    <p><small>2026-03-18</small></p>
-    <p>derde blogpost ...</p>
-    </article>
-    
-
-    <article class="post-card">
-
-        
         <a href="/posts/zesde-post">
             <picture>
                 <source type="image/webp"
@@ -402,7 +402,7 @@
             
         </ul>
         </div
-        <p>&copy; Mijn blog - Welkom op mijn persoonlijke blog.</p>
+        <p>&copy; <script>document.write(/\d{4}/.exec(Date())[0])</script> Mijn blog - Welkom op mijn persoonlijke blog.</p>
     </footer>
 
     <div id="lightbox" class="lightbox hidden">

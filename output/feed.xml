@@ -6,6 +6,23 @@
         <description>Welkom op mijn persoonlijke blog.</description>
         
         <item>
+            <title>Mijn derde post</title>
+            <link>https://localhost:5500/posts/derde-post/</link>
+            <pubDate>Thu, 09 Apr 2026 00:00:00 +0000</pubDate>
+            <description><![CDATA[<p>Welkom bij mijn derde blogpost. Dit is <strong>Markdown</strong>.</p>
+<h2>kop</h2>
+<ul>
+<li>First item</li>
+<li>Second item</li>
+<li>Third item</li>
+<li>Fourth item </li>
+</ul>
+<p>Tijd voor een rechte lijn</p>
+<hr/>
+<p>Na de rechte lijn</p>]]></description>
+        </item>
+        
+        <item>
             <title>Mijn vijfde post - quote</title>
             <link>https://localhost:5500/posts/vijfde-post/</link>
             <pubDate>Wed, 08 Apr 2026 00:00:00 +0000</pubDate>
@@ -166,13 +183,6 @@
             <description><![CDATA[<p>Welkom bij mijn negende blogpost. Dit is <strong>Markdown</strong>.</p>
 <p><div class="warning">Dit is een waarschuwing! ! !</div></p>
 <p><a class="btn btn-primary" href="/files/app.zip">Download</a></p>]]></description>
-        </item>
-        
-        <item>
-            <title>Mijn derde post</title>
-            <link>https://localhost:5500/posts/derde-post/</link>
-            <pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate>
-            <description><![CDATA[<p>Welkom bij mijn derde blogpost. Dit is <strong>Markdown</strong>.</p>]]></description>
         </item>
         
         <item>

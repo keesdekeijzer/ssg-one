@@ -31,7 +31,7 @@
             {% endfor %}
         </ul>
         </div
-        <p>&copy; {{ site.title }} - {{ site.description }}</p>
+        <p>&copy; <script>document.write(/\d{4}/.exec(Date())[0])</script> {{ site.title }} - {{ site.description }}</p>
     </footer>
 
     <div id="lightbox" class="lightbox hidden">
