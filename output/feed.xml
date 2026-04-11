@@ -33,10 +33,11 @@
         
         <item>
             <title>Mijn zevende post - code</title>
-            <link>https://localhost:5500/posts/zevende-post/</link>
+            <link>https://localhost:5500/posts/zevende-post-code/</link>
             <pubDate>Thu, 02 Apr 2026 00:00:00 +0000</pubDate>
             <description><![CDATA[<p>Welkom bij mijn zevende blogpost. Dit is <strong>Markdown</strong>.</p>
-<p><pre class="code-block"><code class="python">def hello():
+<p><pre class="code-block"><code class="language-python"># dit is commentaar
+def hello():
     print("Hallo Wereld!")</code></pre></p>]]></description>
         </item>
         

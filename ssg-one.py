@@ -510,7 +510,7 @@ var foundtext = "Resultaten:";
             for (var k in final_results){
                 if (final_results.hasOwnProperty(k)) {
                     if (final_results[k] == i) {
-                         list= list + '(' + final_results[k] + ') <a href="' + pages[k]['page'] + '">'+ page_titles[k] + '</a>' + '<br>';
+                         list= list + '(' + final_results[k] + ') <a href="' + pages[k]['page'] + '">'+ page_titles[k] + '</a><br>' + '<br>';
                     }
                  }
             }

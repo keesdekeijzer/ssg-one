@@ -146,7 +146,7 @@ voorbeeld:
 
 ## Syntax highlighting
 
-Deze kan worden toegevoegd via Prism.js of Highlight.js
+Deze wordt toegevoegd via Prism.js
 
 ## Zoekfunctie
 
@@ -162,8 +162,6 @@ Voorbeeld:
 title: Mijn eerste post
 date: 2026-04-01
 tags: [python, post]
-draft: true
-publish_date: 2026-04-01
 summary: eerste blogpost
 hero: images/posts/default2.jpg
 ```

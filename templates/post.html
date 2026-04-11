@@ -34,6 +34,7 @@
   <div class="post-content">{{ content | safe }}</div>
 
   {% if tags %}
+  <hr>
     <p class="tags">Tags: 
       {% for tag in tags %}
         <a href="/tags/{{ tag }}">{{ tag }}</a>{% if not loop.last %}, {% endif %}     

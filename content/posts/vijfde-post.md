@@ -2,8 +2,6 @@
 title: Mijn vijfde post - quote
 date: 2026-04-08
 tags: [python, post]
-draft: true
-publish_date: 2026-04-08
 summary: vijfde blogpost
 hero: images/posts/default2.jpg
 ---

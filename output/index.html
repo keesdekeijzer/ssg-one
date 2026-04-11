@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - Pagina 1 - Mijn blog</title>
     <link rel="stylesheet" href="/static/style.css">
+    <link href="/static/prism.css" rel="stylesheet" />
     <script src="/static/lightbox.js"></script>
 </head>
 <body>
@@ -102,30 +103,30 @@
     <article class="post-card">
 
         
-        <a href="/posts/zevende-post">
+        <a href="/posts/zevende-post-code">
             <picture>
                 <source type="image/webp"
                 srcset="
-                /static/thumbs/zevende-post-small.webp 300w,
-                /static/thumbs/zevende-post-medium.webp 600w
+                /static/thumbs/zevende-post-code-small.webp 300w,
+                /static/thumbs/zevende-post-code-medium.webp 600w
                 "
                 sizes="(max-width: 600px) 100vw, 300px">
 
                 <source type="image/jpeg"
                 srcset="
-                /static/thumbs/zevende-post-small.jpg 300w,
-                /static/thumbs/zevende-post-medium.jpg 600w
+                /static/thumbs/zevende-post-code-small.jpg 300w,
+                /static/thumbs/zevende-post-code-medium.jpg 600w
                 "
                 sizes="(max-width: 600px) 100vw, 300px">
 
-                <img class="thumb" src="/static/thumbs/zevende-post-medium.jpg" alt="Mijn zevende post - code" loading="lazy">
+                <img class="thumb" src="/static/thumbs/zevende-post-code-medium.jpg" alt="Mijn zevende post - code" loading="lazy">
             </picture>
         </a>
         
 
     
     <h2>
-        <a href="/posts/zevende-post/">Mijn zevende post - code</a>
+        <a href="/posts/zevende-post-code/">Mijn zevende post - code</a>
     </h2>
    
     <p><small>2026-04-02</small></p>
@@ -401,7 +402,7 @@
             <li><a href="https://github.com">GitHub</a></li>
             
         </ul>
-        </div
+    </div>
         <p>&copy; <script>document.write(/\d{4}/.exec(Date())[0])</script> Mijn blog - Welkom op mijn persoonlijke blog.</p>
     </footer>
 
@@ -422,6 +423,6 @@
             <span>Tik om te sluiten</span>
         </div>
     </div>
-
+<script src="/static/prism.js"></script>
 </body>
 </html>

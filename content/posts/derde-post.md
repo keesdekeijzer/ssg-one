@@ -2,8 +2,6 @@
 title: Mijn derde post
 date: 2026-04-09
 tags: [python, post]
-draft: true
-publish_date: 2026-04-09
 summary: derde blogpost
 hero: images/posts/default2.jpg
 ---

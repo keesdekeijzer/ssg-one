@@ -28,7 +28,7 @@ def apply(html_text):
         # HTML-output
 
         return (
-            f'<pre class="code-block"><code class="{lang}">'
+            f'<pre class="code-block"><code class="language-{lang}">'
             f'{escaped}'
             f'</code></pre>'
         )
