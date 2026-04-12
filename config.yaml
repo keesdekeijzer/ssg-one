@@ -21,7 +21,7 @@ menu:
   - name: "Home"
     url: "/"
   - name: "Blog"
-    url: "/"
+    url: "/blog/"
   - name: "Over"
     url: "/about/"
   - name: "Search"

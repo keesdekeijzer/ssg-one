@@ -324,6 +324,32 @@ def render_index(posts):
         write_file(os.path.join(out_dir, 'index.html'), html)
 
 
+def render_blog(posts):
+
+    template = env.get_template('blog.html')
+    per_page = CONFIG['blog']['index_limit']
+    pages = paginate(posts, per_page)
+
+    for i, page_posts in enumerate(pages, start=1):
+        if i == 1:
+            out_dir = OUTPUT_DIR + "/blog"
+        else:
+            pattern = CONFIG['blog']['pagination_url']
+
+            out_dir = os.path.join(OUTPUT_DIR, pattern.format(num=i))
+        #print("page:",i)
+        html = template.render(posts=page_posts, 
+                               page=i, 
+                               total_pages=len(pages),
+                               site=CONFIG['site'], 
+                               menu=CONFIG['menu'], 
+                               menu_footer=CONFIG['menu_footer'],
+                               title=f"Blog - Pagina {i}",
+                               )
+
+        write_file(os.path.join(out_dir, 'index.html'), html)
+
+
 def render_tags(posts):
     tags = {}
     for post in posts:
@@ -564,6 +590,7 @@ def build():
         render_post(post)
     
     render_index(posts)
+    render_blog(posts)
     render_tags(posts)
     render_pages(SHORTCODES)
     render_rss(posts)
