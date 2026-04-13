@@ -8,11 +8,16 @@
     <link href="/static/prism.css" rel="stylesheet" />
     <script src="/static/lightbox.js"></script>
     <link href="/static/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 56px; /* Adjust this value based on your navbar height */
+        }
+    </style>
 </head>
 <body>
     <header>
     
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 fixed-top">
         <div class="container">
             <a class="navbar-brand" href="/">Mijn blog</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -133,7 +138,7 @@
                     <h2>Wil je meer weten?</h2>
                     <p class="lead">Bezoek onze blog voor diepgaande artikelen, tips en het 
                         laatste nieuws over onze producten en diensten.</p>
-                    <a href="/blog/" class="btn btn-primary btn-lg">Naar de blog</a>
+                    <button class="btn btn-secondary btn-lg ms-2" data-bs-toggle="modal" data-bs-target="#contactModal">Contacteer ons</button>
                 </div>
                 <div class="col-md">
                     <img class="img-fluid" src="/static/images/img3.jpg" alt="CTA">
@@ -141,6 +146,144 @@
             </div>
         </div>
     </section>
+
+    <section id="questions" class="p-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Veelgestelde vragen</h2>
+            <div class="accordion accordion-flush" id="faqAccordion">
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading1">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                            dit is vraag 1
+                        </button>
+                    </h2>
+                    <div id="collapse1" class="accordion-collapse collapse" aria-labelledby="heading1" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <h1>antwoord op deze vraag</h1>
+<p>Dit is het antwoord op vraag 1</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading2">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                            dit is vraag 2
+                        </button>
+                    </h2>
+                    <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <h1>antwoord op deze vraag</h1>
+<p>Dit is het antwoord op vraag 2</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading3">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                            dit is vraag 3
+                        </button>
+                    </h2>
+                    <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <h1>antwoord op deze vraag</h1>
+<p>Dit is het antwoord op vraag 3</p>
+<ul>
+<li>een</li>
+<li>twee</li>
+<li>drie</li>
+</ul>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <section id="medewerkers" class="p-5 bg-primary">
+        <div class="container">
+            <h2 class="text-center text-light mb-4">Onze medewerkers</h2>
+            <div class="row g-4">
+                
+                <div class="col-md-4">
+                    <div class="card bg-dark text-light">
+                        <img src="https://randomuser.me/api/portraits/men/12.jpg" class="card-img-top rounded-circle" alt="Gerald Philips">
+                        <div class="card-body">
+                            <h5 class="card-title">Gerald Philips</h5>
+                            <p class="card-text">medewerker</p>
+                            <p class="card-text"><p>Dit is de bio van deze medewerker.</p></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card bg-dark text-light">
+                        <img src="https://randomuser.me/api/portraits/women/12.jpg" class="card-img-top rounded-circle" alt="Betty Philips">
+                        <div class="card-body">
+                            <h5 class="card-title">Betty Philips</h5>
+                            <p class="card-text">medewerker</p>
+                            <p class="card-text"><p>Dit is de bio van deze medewerker.</p></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card bg-dark text-light">
+                        <img src="https://randomuser.me/api/portraits/women/11.jpg" class="card-img-top rounded-circle" alt="Patty Smith">
+                        <div class="card-body">
+                            <h5 class="card-title">Patty Smith</h5>
+                            <p class="card-text">medewerker</p>
+                            <p class="card-text"><p>Dit is de bio van deze medewerker.</p></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card bg-dark text-light">
+                        <img src="https://randomuser.me/api/portraits/men/11.jpg" class="card-img-top rounded-circle" alt="John Smith">
+                        <div class="card-body">
+                            <h5 class="card-title">John Smith</h5>
+                            <p class="card-text">medewerker</p>
+                            <p class="card-text"><p>Dit is de bio van deze medewerker.</p></p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="contactModalLabel">Contacteer ons</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Naam</label>
+                            <input type="text" class="form-control" id="name" placeholder="Jouw naam">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">E-mailadres</label>
+                            <input type="email" class="form-control" id="email" placeholder="Jouw e-mailadres">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Bericht</label>
+                            <textarea class="form-control" id="message" rows="5" placeholder="Jouw bericht"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Verstuur</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <main>
         
@@ -504,7 +647,8 @@
 
         
     </main>
-    <footer>
+    <footer class="bg-dark text-light text-center p-4 position-relative">
+        <div class=""container">
         <div class="menu-footer">
         <ul>
             
@@ -521,6 +665,8 @@
         </ul>
     </div>
         <p>&copy; <script>document.write(/\d{4}/.exec(Date())[0])</script> Mijn blog - Welkom op mijn persoonlijke blog.</p>
+        <a href="#showcase" class="btn btn-primary position-absolute top-50 end-0 translate-middle-y me-3">Terug naar boven</a>
+        </div>
     </footer>
 
     <div id="lightbox" class="lightbox hidden">

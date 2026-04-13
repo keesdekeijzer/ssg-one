@@ -304,6 +304,30 @@ def render_index(posts):
     per_page = CONFIG['blog']['index_limit']
     pages = paginate(posts, per_page)
 
+    faqs = []
+    for filename in os.listdir("content/faqs"):
+        if filename.endswith('.md'):
+            path = os.path.join("content/faqs", filename)
+            faq = frontmatter.load(path)
+            html = markdown.markdown(faq.content)
+            faqs.append({
+                "question": faq.get("question"),
+                "answer": html
+            })
+
+    medewerkers = []
+    for filename in os.listdir("content/medewerkers"):
+        if filename.endswith('.md'):
+            path = os.path.join("content/medewerkers", filename)
+            medewerker = frontmatter.load(path)
+            html = markdown.markdown(medewerker.content)
+            medewerkers.append({
+                "name": medewerker.get("name"),
+                "role": medewerker.get("role"),
+                "bio": html,
+                "photo": medewerker.get("photo")
+            })
+
     for i, page_posts in enumerate(pages, start=1):
         if i == 1:
             out_dir = OUTPUT_DIR
@@ -319,6 +343,8 @@ def render_index(posts):
                                menu=CONFIG['menu'], 
                                menu_footer=CONFIG['menu_footer'],
                                title=f"Blog - Pagina {i}",
+                               faqs=faqs,
+                                medewerkers=medewerkers   
                                )
 
         write_file(os.path.join(out_dir, 'index.html'), html)
