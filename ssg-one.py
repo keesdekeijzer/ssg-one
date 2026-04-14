@@ -298,7 +298,7 @@ def render_post(post):
     write_file(os.path.join(out_dir, 'index.html'), html)
 
 
-def render_index(posts):
+def render_index(posts, SHORTCODES):
 
     template = env.get_template('index.html')
     per_page = CONFIG['blog']['index_limit']
@@ -310,6 +310,7 @@ def render_index(posts):
             path = os.path.join("content/faqs", filename)
             faq = frontmatter.load(path)
             html = markdown.markdown(faq.content)
+            html = apply_shortcodes(html, SHORTCODES)
             faqs.append({
                 "question": faq.get("question"),
                 "answer": html
@@ -615,7 +616,7 @@ def build():
     for post in posts:
         render_post(post)
     
-    render_index(posts)
+    render_index(posts, SHORTCODES)
     render_blog(posts)
     render_tags(posts)
     render_pages(SHORTCODES)

@@ -12,6 +12,9 @@
         body {
             padding-top: 56px; /* Adjust this value based on your navbar height */
         }
+        .paarse {
+            background-color: #6f42c1;
+        }
     </style>
 </head>
 <body>
@@ -42,7 +45,7 @@
                 <div>
             <h1 class="text-warning">{{ site.title }}</h1>
             <p class="lead my-4">{{ site.description }}</p>
-            <button class="btn btn-primary btn-lg">Lees meer</button>
+            <button class="btn btn-primary btn-lg paarse">Lees meer</button>
                 </div>
                 <img class="img-fluid w-50" d-none d-sm-block src="/static/images/img1.jpg" alt="{{ site.title }}">
             </div>
@@ -50,7 +53,7 @@
         </div>
     </section>
 
-    <section class="bg-primary text-light p-5" id="newsletter">
+    <section class="text-light p-5 paarse" id="newsletter">
         <div class="container">
             <div class="d-md-flex justify-content-between align-items-center">
                 <h3 class="mb-3 mb-md-0">Abonneer op onze nieuwsbrief</h3>
@@ -112,7 +115,7 @@
                     <h2>Wil je meer weten?</h2>
                     <p class="lead">Bezoek onze blog voor diepgaande artikelen, tips en het 
                         laatste nieuws over onze producten en diensten.</p>
-                    <a href="/blog/" class="btn btn-primary btn-lg">Naar de blog</a>
+                    <a href="/blog/" class="btn btn-primary btn-lg paarse">Naar de blog</a>
                 </div>
             </div>
         </div>
@@ -126,7 +129,7 @@
                     <h2>Wil je meer weten?</h2>
                     <p class="lead">Bezoek onze blog voor diepgaande artikelen, tips en het 
                         laatste nieuws over onze producten en diensten.</p>
-                    <button class="btn btn-secondary btn-lg ms-2" data-bs-toggle="modal" data-bs-target="#contactModal">Contacteer ons</button>
+                    <button class="btn btn-secondary btn-lg ms-2 paarse" data-bs-toggle="modal" data-bs-target="#contactModal">Contacteer ons</button>
                 </div>
                 <div class="col-md">
                     <img class="img-fluid" src="/static/images/img3.jpg" alt="CTA">
@@ -157,12 +160,12 @@
         </div>
     </section>
 
-    <section id="medewerkers" class="p-5 bg-primary">
+    <section id="medewerkers" class="p-5 paarse">
         <div class="container">
             <h2 class="text-center text-light mb-4">Onze medewerkers</h2>
             <div class="row g-4">
                 {% for medewerker in medewerkers %}
-                <div class="col-md-4">
+                <div class="col-md-3"> <!-- md-3 geeft 4 kolommen (3x4=12)-->
                     <div class="card bg-dark text-light">
                         <img src="{{ medewerker.photo }}" class="card-img-top rounded-circle" alt="{{ medewerker.name }}">
                         <div class="card-body">
@@ -199,7 +202,7 @@
                             <label for="message" class="form-label">Bericht</label>
                             <textarea class="form-control" id="message" rows="5" placeholder="Jouw bericht"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Verstuur</button>
+                        <button type="submit" class="btn btn-primary paarse">Verstuur</button>
                     </form>
                 </div>
             </div>
@@ -221,7 +224,7 @@
         </ul>
     </div>
         <p>&copy; <script>document.write(/\d{4}/.exec(Date())[0])</script> {{ site.title }} - {{ site.description }}</p>
-        <a href="#showcase" class="btn btn-primary position-absolute top-50 end-0 translate-middle-y me-3">Terug naar boven</a>
+        <a href="#showcase" class="btn btn-primary position-absolute top-50 end-0 translate-middle-y me-3 paarse">Terug naar boven</a>
         </div>
     </footer>
 

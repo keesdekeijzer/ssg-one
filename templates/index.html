@@ -48,13 +48,13 @@
     {% if page == 2 %}
     <a href="/">Vorige</a>
     {% elif page > 2 %}
-    <a href="/page/{{ page-1 }}/">Vorige</a>
+    <a href="/page/{{ page-1 }}/">&lt; Vorige&nbsp;</a>
     {% endif %}
 
 
-    <span>Pagina {{ page }} van {{ total_pages }}</span>
+    <span>&nbsp; Pagina {{ page }} van {{ total_pages }} &nbsp;</span>
     {% if page < total_pages %}
-    <a href="/page/{{ page+1 }}/">Volgende</a>
+    <a href="/page/{{ page+1 }}/">&nbsp;Volgende &gt;</a>
     {% endif %}
 </div>
 
