@@ -7,24 +7,94 @@
     <link rel="stylesheet" href="/static/style.css">
     <link href="/static/prism.css" rel="stylesheet" />
     <script src="/static/lightbox.js"></script>
+    <link href="/static/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 56px; /* Adjust this value based on your navbar height */
+        }
+        .paarse {
+            background-color: #6f42c1;
+        }
+    </style>
 </head>
 <body>
     <header>
-    <h1>Mijn blog</h1>
-    <nav>
-        <ul>
-            
-            <li><a href="/">Home</a></li>
-            
-            <li><a href="/blog/">Blog</a></li>
-            
-            <li><a href="/about/">Over</a></li>
-            
-            <li><a href="/search/">Search</a></li>
-            
-        </ul>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">Mijn blog</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog/">Blog</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about/">Over</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/search/">Search</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
     </nav>
     </header>
+
+    
+
+    
+
+    
+
+
+    
+
+    
+
+    
+
+     
+
+    <!-- Modal -->
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="contactModalLabel">Contacteer ons</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Naam</label>
+                            <input type="text" class="form-control" id="name" placeholder="Jouw naam">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">E-mailadres</label>
+                            <input type="email" class="form-control" id="email" placeholder="Jouw e-mailadres">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Bericht</label>
+                            <textarea class="form-control" id="message" rows="5" placeholder="Jouw bericht"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary paarse">Verstuur</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <main>
         
 
@@ -77,7 +147,8 @@ def hello():
 
         
     </main>
-    <footer>
+    <footer class="bg-dark text-light text-center p-4 position-relative">
+        <div class=""container">
         <div class="menu-footer">
         <ul>
             
@@ -94,6 +165,8 @@ def hello():
         </ul>
     </div>
         <p>&copy; <script>document.write(/\d{4}/.exec(Date())[0])</script> Mijn blog - Welkom op mijn persoonlijke blog.</p>
+        <a href="#showcase" class="btn btn-primary position-absolute top-50 end-0 translate-middle-y me-3 paarse">Terug naar boven</a>
+        </div>
     </footer>
 
     <div id="lightbox" class="lightbox hidden">
@@ -114,5 +187,6 @@ def hello():
         </div>
     </div>
 <script src="/static/prism.js"></script>
+<script src="/static/bootstrap.bundle.min.js"></script>
 </body>
 </html>

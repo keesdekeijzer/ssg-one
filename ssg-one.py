@@ -303,6 +303,13 @@ def render_index(posts, SHORTCODES):
     template = env.get_template('index.html')
     per_page = CONFIG['blog']['index_limit']
     pages = paginate(posts, per_page)
+    showcase = True
+    newsletter = True
+    features = True
+    cta = True
+    cta2 = True
+    questions = True
+    medewerkers_section = True
 
     faqs = []
     for filename in os.listdir("content/faqs"):
@@ -345,7 +352,14 @@ def render_index(posts, SHORTCODES):
                                menu_footer=CONFIG['menu_footer'],
                                title=f"Blog - Pagina {i}",
                                faqs=faqs,
-                                medewerkers=medewerkers   
+                                medewerkers=medewerkers,
+                                showcase=showcase,
+                                newsletter=newsletter,
+                                features=features,
+                                cta=cta,
+                                cta2=cta2,
+                                questions=questions,
+                                medewerkers_section=medewerkers_section
                                )
 
         write_file(os.path.join(out_dir, 'index.html'), html)
@@ -463,9 +477,7 @@ def render_search_index(posts):
             else:
                 words_index[combo] = 1
 
-    
-    #for _, __ in words_index.items():
-        #print("\n woorden in index:", _, __)
+
 
 
     # pages
@@ -476,13 +488,14 @@ def render_search_index(posts):
             page = frontmatter.load(path)
             slug = filename.replace(".md", "")
             html = markdown.markdown(page.content)
+            html = apply_shortcodes(html, SHORTCODES)
 
             items.append({
                 "title": page.get("title"),
                 "url": f"/{slug}/",
                 "content": html,
                 "tags": page.get("tags", []),
-                "summary": page.get("summary", "")
+                "summary": page.get("summary", ""),
             })
 
     write_file(os.path.join(OUTPUT_DIR, "search.json"), json.dumps(items))
