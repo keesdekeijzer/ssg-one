@@ -194,6 +194,21 @@ def process_gallery_images(html, post_slug):
 
     return str(soup)
 
+# get faqs
+
+def load_faqs(SHORTCODES):
+    faqs = []
+    for filename in os.listdir("content/faqs"):
+        if filename.endswith('.md'):
+            path = os.path.join("content/faqs", filename)
+            faq = frontmatter.load(path)
+            html = markdown.markdown(faq.content)
+            html = apply_shortcodes(html, SHORTCODES)
+            faqs.append({
+                "question": faq.get("question"),
+                "answer": html
+            })
+    return faqs
 
 # Laad alle posts en sorteer ze op datum
 
@@ -311,17 +326,7 @@ def render_index(posts, SHORTCODES):
     questions = True
     medewerkers_section = True
 
-    faqs = []
-    for filename in os.listdir("content/faqs"):
-        if filename.endswith('.md'):
-            path = os.path.join("content/faqs", filename)
-            faq = frontmatter.load(path)
-            html = markdown.markdown(faq.content)
-            html = apply_shortcodes(html, SHORTCODES)
-            faqs.append({
-                "question": faq.get("question"),
-                "answer": html
-            })
+    faqs = load_faqs(SHORTCODES)
 
     medewerkers = []
     for filename in os.listdir("content/medewerkers"):
@@ -420,14 +425,18 @@ def render_pages(SHORTCODES):
 
         path = os.path.join(PAGES_DIR, filename)
         page = frontmatter.load(path)
-
-        # page_data["hero"] = page.get("hero", None)
+        questions = page.get('questions', False)
+        if questions:
+            faqs = load_faqs(SHORTCODES)
+        else:
+            faqs = []
+        print("questions:", questions)
 
         html_content = markdown.markdown(page.content)
         html_content = apply_shortcodes(html_content, SHORTCODES)
 
         rendered = template.render(title=page.get('title'), content=html_content, site=CONFIG['site'], menu=CONFIG['menu'],
-                                   menu_footer=CONFIG['menu_footer'], page=page)
+                                   menu_footer=CONFIG['menu_footer'], page=page, questions=questions, faqs=faqs)
 
         slug = filename.replace('.md', '')
 

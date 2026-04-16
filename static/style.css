@@ -58,7 +58,7 @@ nav ul li a {
 }
 
 main {
-    max-width: 800px;
+    /* max-width: 800px; */
     margin: 2rem auto;
     padding: 2rem;
 }

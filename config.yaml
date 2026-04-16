@@ -26,6 +26,8 @@ menu:
     url: "/about/"
   - name: "Search"
     url: "/search/"
+  - name: "faq"
+    url: "/faq/"
 
 menu_footer:
   - name: "Privacybeleid"
