@@ -149,18 +149,14 @@
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="heading3">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                            dit is vraag 6
+                            Hoe plaats je een afbeelding in een Markdown document?
                         </button>
                     </h2>
                     <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3" data-bs-parent="#faqAccordion">
                         <div class="accordion-body">
-                            <h1>antwoord op deze vraag</h1>
-<p>Dit is het antwoord op vraag 6</p>
-<ul>
-<li>een</li>
-<li>twee</li>
-<li>drie</li>
-</ul>
+                            <h1>De code voor een afbeelding</h1>
+<p>Een uitroepteken, dan de vierkante haken met een Alt tekst, dan de kromme haken me de locatie van het plaatje en eventueel een titel.</p>
+<p><pre class="code-block"><code class="language-markdown">![Alt tekst](static/images/default.jpg &quot;een titel&quot;)</code></pre></p>
                         </div>
                     </div>
                 </div>
@@ -185,18 +181,22 @@ def hello():
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="heading5">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
-                            dit is vraag 5
+                            Hoe werken Romeinse cijfers?
                         </button>
                     </h2>
                     <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="heading5" data-bs-parent="#faqAccordion">
                         <div class="accordion-body">
-                            <h1>antwoord op deze vraag</h1>
-<p>Dit is het antwoord op vraag 5</p>
-<ul>
-<li>een</li>
-<li>twee</li>
-<li>drie</li>
-</ul>
+                            <h1>Romeinse cijfers</h1>
+<table>
+<tr><td>Symbool</td><td>Waarde</td></tr>
+<tr><td>I</td><td>1</td></tr>
+<tr><td>V</td><td>5</td></tr>
+<tr><td>X</td><td>10</td></tr>
+<tr><td>L</td><td>50</td></tr>
+<tr><td>C</td><td>100</td></tr>
+<tr><td>D</td><td>500</td></tr>
+<tr><td>M</td><td>1000</td></tr>
+</table>
                         </div>
                     </div>
                 </div>
@@ -204,10 +204,26 @@ def hello():
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="heading6">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
-                            dit is vraag 3
+                            Een gebruiker sudo maken
                         </button>
                     </h2>
                     <div id="collapse6" class="accordion-collapse collapse" aria-labelledby="heading6" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <h1>Een gebruiker de mogelijkheid geven om opdrachten via sudo uit te voeren</h1>
+<p>Voorwaarde is wel dat sudo is geinstalleerd.</p>
+<p><pre class="code-block"><code class="language-bash"># voorbeeld voor gebruiker &quot;kees&quot;
+usermod -aG sudo kees</code></pre></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading7">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
+                            dit is vraag 3
+                        </button>
+                    </h2>
+                    <div id="collapse7" class="accordion-collapse collapse" aria-labelledby="heading7" data-bs-parent="#faqAccordion">
                         <div class="accordion-body">
                             <h1>antwoord op deze vraag</h1>
 <p>Dit is het antwoord op vraag 3</p>
