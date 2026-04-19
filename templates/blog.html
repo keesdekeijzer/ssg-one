@@ -6,9 +6,11 @@
 <ul class="post-list">
     {% for post in posts %}
 
-    <article class="post-card">
-
-        {% if post.hero %}
+     <section class="p-5 text-center">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-md">
+                    {% if post.hero %}
         <a href="/posts/{{ post.slug }}">
             <picture>
                 <source type="image/webp"
@@ -31,15 +33,19 @@
         {% else %}
         <div class="thumb-placeholder"></div>
         {% endif %}
-
-    
-    <h2>
+                </div>
+                <div class="col-md p-5">
+                    <h2>
         <a href="/posts/{{ post.slug }}/">{{ post.title }}</a>
     </h2>
    
     <p><small>{{ post.date.strftime("%Y-%m-%d") }}</small></p>
     <p>{{ post.summary }} ...</p>
-    </article>
+                    <a href="/posts/{{ post.slug }}/" class="btn btn-primary btn-lg paarse">Naar het artikel</a>
+                </div>
+            </div>
+        </div>
+    </section>
     {% endfor %}
 </ul>
 
