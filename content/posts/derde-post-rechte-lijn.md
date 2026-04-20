@@ -1,6 +1,6 @@
 ---
-title: Mijn derde post
-date: 2026-04-09
+title: Mijn derde post- rechte lijn
+date: 2026-04-19
 tags: [python, post]
 summary: derde blogpost
 hero: images/posts/default2.jpg

@@ -22,7 +22,8 @@
     
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="/">{{ site.title }}</a>
+            <a class="navbar-brand" href="/"><img src="/static/images/logo.png" alt="{{ site.title }}" 
+                class="img-fluid" style="max-height: 80px;"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -110,8 +111,6 @@
         </div>
     </section>
     {% endif %}
-
-
     {% if cta %}
     <section class="p-5 text-center" id="cta">
         <div class="container">
@@ -129,6 +128,8 @@
         </div>
     </section>
     {% endif %}
+
+
 
     {% if cta2 %}
     <section class="bg-dark text-light p-5 text-center" id="cta2">

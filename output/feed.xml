@@ -6,9 +6,9 @@
         <description>Welkom op mijn persoonlijke blog.</description>
         
         <item>
-            <title>Mijn derde post</title>
-            <link>https://localhost:5500/posts/derde-post/</link>
-            <pubDate>Thu, 09 Apr 2026 00:00:00 +0000</pubDate>
+            <title>Mijn derde post- rechte lijn</title>
+            <link>https://localhost:5500/posts/derde-post-rechte-lijn/</link>
+            <pubDate>Sun, 19 Apr 2026 00:00:00 +0000</pubDate>
             <description><![CDATA[<p>Welkom bij mijn derde blogpost. Dit is <strong>Markdown</strong>.</p>
 <h2>kop</h2>
 <ul>
@@ -194,17 +194,38 @@ def hello():
         </item>
         
         <item>
+            <title>Mijn elfde post</title>
+            <link>https://localhost:5500/posts/elfde-post-tables/</link>
+            <pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate>
+            <description><![CDATA[<p>Welkom bij mijn elfde blogpost. Dit is <strong>Markdown</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>kop1</th>
+<th>kop2</th>
+<th>kop3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>item1</td>
+<td>item2</td>
+<td>item3</td>
+</tr>
+<tr>
+<td>item4</td>
+<td>item5</td>
+<td>item6</td>
+</tr>
+</tbody>
+</table>]]></description>
+        </item>
+        
+        <item>
             <title>Mijn tweede post</title>
             <link>https://localhost:5500/posts/tweede-post/</link>
             <pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate>
             <description><![CDATA[<p>Welkom bij mijn tweede blogpost. Dit is <strong>Markdown</strong>.</p>]]></description>
-        </item>
-        
-        <item>
-            <title>Mijn elfde post</title>
-            <link>https://localhost:5500/posts/elfde-post/</link>
-            <pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate>
-            <description><![CDATA[<p>Welkom bij mijn elfde blogpost. Dit is <strong>Markdown</strong>.</p>]]></description>
         </item>
         
     </channel>

@@ -202,7 +202,7 @@ def load_faqs(SHORTCODES):
         if filename.endswith('.md'):
             path = os.path.join("content/faqs", filename)
             faq = frontmatter.load(path)
-            html = markdown.markdown(faq.content)
+            html = markdown.markdown(faq.content, extensions=['tables'])
             html = apply_shortcodes(html, SHORTCODES)
             faqs.append({
                 "question": faq.get("question"),
@@ -221,7 +221,7 @@ def load_posts(SHORTCODES):
         path = os.path.join(POSTS_DIR, filename)
         post = frontmatter.load(path)
 
-        html = markdown.markdown(post.content)
+        html = markdown.markdown(post.content, extensions=['tables'])
         html = apply_shortcodes(html, SHORTCODES)
         slug = filename.replace('.md', '')
 
@@ -333,7 +333,7 @@ def render_index(posts, SHORTCODES):
         if filename.endswith('.md'):
             path = os.path.join("content/medewerkers", filename)
             medewerker = frontmatter.load(path)
-            html = markdown.markdown(medewerker.content)
+            html = markdown.markdown(medewerker.content, extensions=['tables'])
             medewerkers.append({
                 "name": medewerker.get("name"),
                 "role": medewerker.get("role"),
@@ -432,7 +432,7 @@ def render_pages(SHORTCODES):
             faqs = []
         print("questions:", questions)
 
-        html_content = markdown.markdown(page.content)
+        html_content = markdown.markdown(page.content, extensions=['tables'])
         html_content = apply_shortcodes(html_content, SHORTCODES)
 
         rendered = template.render(title=page.get('title'), content=html_content, site=CONFIG['site'], menu=CONFIG['menu'],
@@ -496,7 +496,7 @@ def render_search_index(posts):
             path = os.path.join(PAGES_DIR, filename)
             page = frontmatter.load(path)
             slug = filename.replace(".md", "")
-            html = markdown.markdown(page.content)
+            html = markdown.markdown(page.content, extensions=['tables'])
             html = apply_shortcodes(html, SHORTCODES)
 
             items.append({
