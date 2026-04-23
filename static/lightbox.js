@@ -7,9 +7,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const overlay = lightbox.querySelector(".lightbox-overlay");
     let overlayTimeout;
+
+    const touchOverlay = lightbox.querySelector(".lightbox-touch-overlay");
+    let touchOverlayTimeout;
+    let startX = 0;
     
     let images = [];
     let index = 0;
+
+    function isTouchDevice() {
+        return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    }
+
+    function showTouchOverlay() {
+        if (!isTouchDevice()) return;
+
+        touchOverlay.classList.remove("hidden");
+
+        clearTimeout(touchOverlayTimeout);
+        touchOverlayTimeout = setTimeout(() => {
+            touchOverlay.classList.add("hidden");
+        }, 3000);
+    }
+
+    function hideTouchOverlay() {
+        touchOverlay.classList.add("hidden");
+    }
 
     function showOverlay() {
         overlay.classList.remove("hidden");
@@ -28,7 +51,8 @@ document.addEventListener("DOMContentLoaded", () => {
         index = i;
         content.innerHTML = images[i].outerHTML;
         lightbox.classList.remove("hidden");
-        showOverlay();
+        showOverlay();  // keyboard navigation overlay
+        showTouchOverlay(); // touch navigation overlay
     }
 
     function closeLightbox() {
@@ -61,6 +85,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     lightbox.addEventListener("mousemove", () => {
         showOverlay();
+    });
+
+    lightbox.addEventListener("touchstart", (e) => {
+        startX = e.touches[0].clientX;
+        hideTouchOverlay();
+    }
+    );
+
+    lightbox.addEventListener("touchend", (e) => {
+        const endX = e.changedTouches[0].clientX;
+        const diff = endX - startX;
+
+        if (Math.abs(diff) > 50) {
+            diff < 0 ? next() : prev();
+        }
+    });
+
+    lightbox.addEventListener("timeupdate", () => {
+        showTouchOverlay();
     });
 
     document.querySelectorAll(".gallery picture").forEach((pic, i) => {
