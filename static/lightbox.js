@@ -25,6 +25,48 @@ document.addEventListener("DOMContentLoaded", () => {
     let startTouchX = 0;
     let startTouchY = 0;
 
+    let velocityX = 0;
+    let velocityY = 0;
+
+    let lastTouchX = 0;
+    let lastTouchY = 0;
+    let lastMoveTime = 0;
+
+    let momentumFrame = null;
+
+    let lastTapTime = 0;
+
+    const doubleTapThreshold = 300; // Time in ms to detect double tap
+    const doubleTapZoom = 2.5; // Zoom level for double tap
+
+    function startMomentum() {
+        const friction = 0.95; // Friction factor for momentum
+        const stopSpeed = 0.02; // Minimum speed to stop momentum
+
+        function step() {
+            panX += velocityX * 10; // Assuming 60fps, so 16ms per frame
+            panY += velocityY * 16;
+            clampPan();
+            updateTransform();
+
+            velocityX *= friction;
+            velocityY *= friction;
+
+            if (Math.abs(velocityX) > stopSpeed || Math.abs(velocityY) > stopSpeed) {
+                momentumFrame = requestAnimationFrame(step);
+            } else {
+                velocityX = 0;
+                velocityY = 0;
+                momentumFrame = null;
+            }
+        }
+
+        if (momentumFrame) {
+            cancelAnimationFrame(momentumFrame);
+        }
+        momentumFrame = requestAnimationFrame(step);
+    }
+
     function isZoomedOrPanning() {
         return scale > 1.01 || panX !== 0 || panY !== 0; // Consider zoomed if scale is greater than 1.01 to avoid floating point issues
     }
@@ -127,6 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     lightbox.addEventListener("touchstart", (e) => {
+        cancelAnimationFrame(momentumFrame); // Stop any ongoing momentum when a new touch starts
         if (isZoomedOrPanning()) return; // Don't start new gesture if already zoomed or panning
         if (isZoomed()) return; // Don't start new gesture if already zoomed
         startX = e.touches[0].clientX;
@@ -138,15 +181,60 @@ document.addEventListener("DOMContentLoaded", () => {
             startDistance = getDistance(e.touches);
             hideTouchOverlay();
         }
+        const now = performance.now();
+        const timeSinceLastTap = now - lastTapTime;
+        if (timeSinceLastTap < doubleTapThreshold && e.touches.length === 1) {
+            e.preventDefault();
+            const img = lightbox.querySelector(".lightbox-content img");
+            const touch = e.touches[0];
+
+            if (scale === 1) {
+                scale = doubleTapZoom;
+                // Zoom in on double tap
+                const rect = img.getBoundingClientRect();
+                const offsetX = touch.clientX - rect.left - rect.width / 2;
+                const offsetY = touch.clientY - rect.top - rect.height / 2;
+
+                panX = -offsetX * (doubleTapZoom - 1);
+                panY = -offsetY * (doubleTapZoom - 1);
+
+                } else {
+                // Reset zoom on second tap
+                scale = 1;
+                panX = 0;
+                panY = 0;
+            }
+            // Double tap detected
+            clampPan();
+            updateTransform();
+        }
+        lastTapTime = now;
     });
 
     lightbox.addEventListener("touchmove", (e) => {
         if (scale > 1 && e.touches.length === 1) {
             e.preventDefault();
-            const dx = e.touches[0].clientX - startTouchX;
-            const dy = e.touches[0].clientY - startTouchY;
-            panX = startPanX + dx;
-            panY = startPanY + dy;
+
+            const touch = e.touches[0];
+            const now = performance.now();
+
+
+            const dx = touch.clientX - lastTouchX;
+            const dy = touch.clientY - lastTouchY;
+            const dt = now - lastMoveTime;
+
+            if (dt > 0) {
+                velocityX = dx / dt;
+                velocityY = dy / dt;
+                
+            }
+            lastTouchX = touch.clientX;
+            lastTouchY = touch.clientY;
+            lastMoveTime = now;
+
+            panX += dx;
+            panY += dy;
+
             clampPan();
             updateTransform();
         }
@@ -192,6 +280,10 @@ document.addEventListener("DOMContentLoaded", () => {
             panX = 0;
             panY = 0;
             updateTransform();
+        }
+        if (scale > 1 && e.touches.length === 0) {
+            cancelAnimationFrame(momentumFrame);
+            startMomentum();
         }
 
     });
