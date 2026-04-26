@@ -36,8 +36,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let lastTapTime = 0;
 
+    let isAnimating = false;
+    let animationFrame = null;
+
     const doubleTapThreshold = 300; // Time in ms to detect double tap
     const doubleTapZoom = 2.5; // Zoom level for double tap
+
+    function animateZoom(startScale, endScale, duration = 250) {
+        const img = lightbox.querySelector(".lightbox-content img");
+        const startTime = performance.now();
+        isAnimating = true;
+
+        function step(now) {
+            const progress = Math.min((now - startTime) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3); // Ease out cubic
+
+            scale = startScale + (endScale - startScale) * eased;
+            updateTransform();
+
+            if (progress < 1) {
+                animationFrame = requestAnimationFrame(step);
+            } else {
+                isAnimating = false;
+                scale = endScale; // Ensure final scale is set
+                updateTransform();
+            }
+        }
+
+        animationFrame = requestAnimationFrame(step);
+    }
 
     function startMomentum() {
         const friction = 0.95; // Friction factor for momentum
@@ -187,10 +214,17 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault();
             const img = lightbox.querySelector(".lightbox-content img");
             const touch = e.touches[0];
+            const rect = img.getBoundingClientRect();
+
+            cancelAnimationFrame(animationFrame); // Stop any ongoing animation on double tap
+
+            const tapX = touch.clientX - rect.left;
+            const tapY = touch.clientY - rect.top;
 
             if (scale === 1) {
                 scale = doubleTapZoom;
                 // Zoom in on double tap
+                const targetScale = doubleTapZoom;
                 const rect = img.getBoundingClientRect();
                 const offsetX = touch.clientX - rect.left - rect.width / 2;
                 const offsetY = touch.clientY - rect.top - rect.height / 2;
@@ -198,15 +232,26 @@ document.addEventListener("DOMContentLoaded", () => {
                 panX = -offsetX * (doubleTapZoom - 1);
                 panY = -offsetY * (doubleTapZoom - 1);
 
+                animateZoom(1, targetScale);
+
                 } else {
+
                 // Reset zoom on second tap
-                scale = 1;
-                panX = 0;
-                panY = 0;
+                targetScale = Math.min(scale * 1.6, 4); // Increase zoom level on subsequent taps, up to 4x
+                const offsetX = tapX - rect.width / 2;
+                const offsetY = tapY - rect.height / 2;
+
+                panX = -offsetX * (targetScale - 1);
+                panY = -offsetY * (targetScale - 1);
+
+                animateZoom(scale, targetScale);
+
             }
             // Double tap detected
             clampPan();
             updateTransform();
+            lastTapTime = now; // Reset last tap time to prevent triple tap
+            return;
         }
         lastTapTime = now;
     });
