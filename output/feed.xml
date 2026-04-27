@@ -6,6 +6,21 @@
         <description>Welkom op mijn persoonlijke blog.</description>
         
         <item>
+            <title>Mijn twaalfde post - koppen</title>
+            <link>https://localhost:5500/posts/twaalfde-post-koppen/</link>
+            <pubDate>Sun, 26 Apr 2026 00:00:00 +0000</pubDate>
+            <description><![CDATA[<p>Welkom bij mijn twaalfde blogpost. Dit is <strong>Markdown</strong>.</p>
+<h2>Een kop nummer 2</h2>
+<p>Zomaar wat tekst.</p>
+<h2>Nog een kop nummer 2</h2>
+<p>Een regel erbij.</p>
+<h3>Een kop nummer 3</h3>
+<p>Een regel tekst.</p>
+<h2>Een kop nummer 2</h2>
+<p>En weer een regel tekst.</p>]]></description>
+        </item>
+        
+        <item>
             <title>Mijn derde post- rechte lijn</title>
             <link>https://localhost:5500/posts/derde-post-rechte-lijn/</link>
             <pubDate>Sun, 19 Apr 2026 00:00:00 +0000</pubDate>
@@ -220,13 +235,6 @@ def hello():
             <link>https://localhost:5500/posts/zesde-post/</link>
             <pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate>
             <description><![CDATA[<p>Welkom bij mijn zesde blogpost. Dit is <strong>Markdown</strong>.</p>]]></description>
-        </item>
-        
-        <item>
-            <title>Mijn tweede post</title>
-            <link>https://localhost:5500/posts/tweede-post/</link>
-            <pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate>
-            <description><![CDATA[<p>Welkom bij mijn tweede blogpost. Dit is <strong>Markdown</strong>.</p>]]></description>
         </item>
         
     </channel>

@@ -101,10 +101,51 @@
 
     <main>
         <div class="container">
+            
         
 <h1>Blog</h1>
 
 <ul class="post-list">
+    
+
+     <section class="p-5 text-center">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-md">
+                    
+        <a href="/posts/twaalfde-post-koppen">
+            <picture>
+                <source type="image/webp"
+                srcset="
+                /static/thumbs/twaalfde-post-koppen-small.webp 300w,
+                /static/thumbs/twaalfde-post-koppen-medium.webp 600w
+                "
+                sizes="(max-width: 600px) 100vw, 300px">
+
+                <source type="image/jpeg"
+                srcset="
+                /static/thumbs/twaalfde-post-koppen-small.jpg 300w,
+                /static/thumbs/twaalfde-post-koppen-medium.jpg 600w
+                "
+                sizes="(max-width: 600px) 100vw, 300px">
+
+                <img class="thumb" src="/static/thumbs/twaalfde-post-koppen-medium.jpg" alt="Mijn twaalfde post - koppen" loading="lazy">
+            </picture>
+        </a>
+        
+                </div>
+                <div class="col-md p-5">
+                    <h2>
+        <a href="/posts/twaalfde-post-koppen/">Mijn twaalfde post - koppen</a>
+    </h2>
+   
+    <p><small>2026-04-26</small></p>
+    <p>twaalfde blogpost ...</p>
+                    <a href="/posts/twaalfde-post-koppen/" class="btn btn-primary btn-lg paarse">Naar het artikel</a>
+                </div>
+            </div>
+        </div>
+    </section>
     
 
      <section class="p-5 text-center">
@@ -466,46 +507,6 @@
         </div>
     </section>
     
-
-     <section class="p-5 text-center">
-        <div class="container">
-            <div class="row align-items-center justify-content-between">
-                <div class="col-md">
-                    
-        <a href="/posts/tweede-post">
-            <picture>
-                <source type="image/webp"
-                srcset="
-                /static/thumbs/tweede-post-small.webp 300w,
-                /static/thumbs/tweede-post-medium.webp 600w
-                "
-                sizes="(max-width: 600px) 100vw, 300px">
-
-                <source type="image/jpeg"
-                srcset="
-                /static/thumbs/tweede-post-small.jpg 300w,
-                /static/thumbs/tweede-post-medium.jpg 600w
-                "
-                sizes="(max-width: 600px) 100vw, 300px">
-
-                <img class="thumb" src="/static/thumbs/tweede-post-medium.jpg" alt="Mijn tweede post" loading="lazy">
-            </picture>
-        </a>
-        
-                </div>
-                <div class="col-md p-5">
-                    <h2>
-        <a href="/posts/tweede-post/">Mijn tweede post</a>
-    </h2>
-   
-    <p><small>2026-03-18</small></p>
-    <p>tweede blogpost ...</p>
-                    <a href="/posts/tweede-post/" class="btn btn-primary btn-lg paarse">Naar het artikel</a>
-                </div>
-            </div>
-        </div>
-    </section>
-    
 </ul>
 
 
@@ -567,5 +568,6 @@
     </div>
 <script src="/static/prism.js"></script>
 <script src="/static/bootstrap.bundle.min.js"></script>
+<script src="/static/overview.js"></script>
 </body>
 </html>
